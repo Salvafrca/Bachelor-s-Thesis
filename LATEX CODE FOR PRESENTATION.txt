@@ -1,0 +1,620 @@
+\documentclass{beamer}
+\usepackage{graphicx} % Required for inserting images
+% Paquetes básicos para idioma y gráficos
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{booktabs}
+\usepackage{tabularx}
+
+% --- Configuración de la portada ---
+\title{\textbf{Geometría del Espacio de Estados y Mecánica Cuántica}}
+\subtitle{Trabajo Fin de Grado}
+\author{Salvador Franco Castilla }
+\institute{
+    Grado en Física \\ 
+    Facultad de Ciencias \\ 
+    Universidad de Granada
+}
+\date{21/07/2026}
+% Aquí insertamos la imagen que me has indicado
+\titlegraphic{\includegraphics[width=4cm]{escudoUGRmonocromo.png}}
+
+\setbeamertemplate{frametitle}[default][center]
+\begin{document}
+
+% --- Primera diapositiva (Portada) ---
+\begin{frame}
+    \titlepage
+\end{frame}
+
+
+
+\begin{frame}{Cuántica para iniciados}
+    \begin{itemize}
+        \item Qué es la Ciencia \vspace{0.5cm}
+        \pause
+        
+        \item La Física \vspace{0.5cm}
+        \pause
+        
+        \item La Mecánica Cuántica \vspace{0.5cm}
+        \pause
+        
+        \item Estado, Sistema, Observable \vspace{0.5cm}
+        \pause
+        
+        \item Modelos para la Mecánica Cuántica  
+    \end{itemize}
+\end{frame}
+
+
+
+
+
+
+
+\begin{frame}{Justificación del trabajo}
+
+    \begin{itemize}
+    
+    \item[P1] \textit{¿Cuál es la estructura algebraica subyacente que describe los observables de forma más rigurosa?} \vspace{0.5cm}
+
+    
+     \item[P2] \textit{¿Es posible encontrar una geometría en el espacio de estados de los observables que genere dicha estructura algebraica?}
+
+    \end{itemize}
+\end{frame}
+
+
+
+
+
+
+
+\begin{frame}{El Origen de la Mecánica Cuántica}
+
+\begin{itemize}
+    \item \textbf{El colapso de la Física Clásica:}
+    \begin{itemize}
+        \item 1887 — Se descubre el Efecto Fotoeléctrico.
+        \item 1890s — El problema del Cuerpo Negro
+    \end{itemize}
+    \vspace{0.2cm}
+    \pause
+    
+    \item \textbf{Los primeros parches cuánticos:}
+    \begin{itemize}
+        \item 1900 — Planck descubre la cuantización de la energía ($E=h\nu$).
+        \item 1905 — Einstein resuelve el Efecto Fotoeléctrico cuantizando la luz (fotones).
+    \end{itemize}
+    \vspace{0.2cm}
+    \pause
+    
+    \item \textbf{Detonantes de una nueva teoría:}
+    \begin{itemize}
+        \item 1924 — De Broglie y el electrón como onda.
+        \item 1927 — Heisenberg y el Principio de Incertidumbre.
+    \end{itemize}
+    \vspace{0.2cm}
+
+
+\end{itemize}
+
+\end{frame}
+
+
+
+
+
+
+\begin{frame}{El Origen de la Mecánica Cuántica}
+
+% El entorno center centra la imagen horizontalmente en la diapositiva
+    \begin{center}
+        % Ajustamos la imagen al ancho o alto máximo de la diapositiva para que ocupe todo el espacio posible sin deformarse
+        \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{IMAGEN1.jpg}
+    \end{center}
+    
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+\begin{frame}{Primera Formulación (1925-1932)}
+
+ \begin{itemize}
+     
+     \item \textbf{Búsqueda de la formalización}
+     \begin{itemize}
+         \item Base Matricial (W. Heisenberg)
+         \item Base Funcional (E. Schrördinger)
+         \item Isomorfismo (J. von Neumann) 
+     \end{itemize}
+      \pause
+
+      
+     \item  \textbf{Estructuras de Estados }
+     \begin{itemize}
+         \item Estados: $\mathscr{H}$
+         \item Cuerpo es $\mathbb{C}$
+     \end{itemize}
+     \pause
+
+    \item \textbf{Estrucutra para los Operadores} 
+        \begin{itemize}        
+         \item Operadores: $\mathcal{B}(\mathscr{H})$
+         \item Observables:
+         En particular $A\in \mathcal{B}(\mathscr{H}), A = A^\dagger$
+         \item Asociatividad $(AB)C = A(BC)$
+         \item No Conmutatividad $AB \neq BA$
+         \item $\dim(\mathcal{H}) = \infty$
+     \end{itemize}
+     \pause
+
+    \item \textbf{Limitaciones o fallos}
+     \begin{itemize}
+         \item Sin justificación física para $\mathbb{C}$
+         \item Sin justificación física parala Asociatividad 
+     \end{itemize}
+
+ \end{itemize}
+
+\end{frame}
+
+
+
+
+
+
+\begin{frame}{Axiomatización del Modelo (1934)}
+
+ \begin{itemize}
+
+    \item \textbf{Motivación de la nueva formulación}
+    \begin{itemize}
+        \item Solventar las carencias del $\mathcal{B}(\mathscr{H})$
+        \item Búsqueda de una \textit{axiomatización} y de una \textit{generalización}
+        \item Poniendo el foco en los \textit{operadores} y no en los \textit{estados}
+    \end{itemize}
+    \pause
+
+
+    \item \textbf{Se busca}
+    \begin{itemize}
+        \item Estructura para los Observables
+        \item Pleno significado físico
+    \end{itemize}
+
+    \item \textbf{Punto de partida}\\
+    Sea $\mathcal{A}$ el espacio de observables y $A, B \in \mathcal{A}$:
+    \begin{itemize}
+        \item Suma: $A + B \in \mathcal{A}$
+        \item Potencias: $A^n \in \mathcal{A}$
+        \item Producto por escalar:$\lambda A \in \mathcal{A}$
+    \end{itemize}
+
+    
+\end{itemize}
+
+\end{frame}
+
+
+
+
+
+\begin{frame}{\textit{Álgebras de Jordan}}
+  \begin{columns}[c]
+    \begin{column}{0.6\textwidth}
+      \begin{itemize}
+        \item Se trata de un álgebra $\mathcal{A}$ sobre $\mathbb{R}$. Sean $A, B \in \mathcal{A}$ el producto $\circ$ cumple:
+          \begin{itemize}
+            \item Conmutatividad: $A \circ B = B \circ A$
+            \item Identidad de Jordan: $(A \circ B) \circ (A \circ A) = A \circ (B \circ (A \circ A))$
+            \item No necesariamente asociativo
+            \item Obtención a partir de un ágebra asociativa
+          \end{itemize}
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+      \begin{figure}
+        \centering
+        \includegraphics[width=\columnwidth, height=0.65\textheight, keepaspectratio]{JORDAN.png}
+        
+      \end{figure}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}{Hipótesis de von Neumann y Wigner}
+
+    \begin{itemize}
+        \item Asumen el álgebra de Jordan
+        \item Restricción a dimensión finita.
+        \item Formalmente Real:
+        $$A_1^2 + A_2^2 + \dots + A_n^2 = 0 \implies A_1 = A_2 = \dots = A_n = 0$$
+    \end{itemize}
+    
+    \vspace{0.5cm} % Espacio entre el texto y las imágenes
+    
+    \begin{center}
+        % Usamos 'height' para asegurar que ambas estén a la misma altura exacta
+        \includegraphics[height=3.5cm]{NEUMANN.png}
+        \hspace{1cm} % Espacio de separación horizontal entre las dos fotos
+        \includegraphics[height=3.5cm]{WIGNER.png}
+    \end{center}
+
+\end{frame}
+
+     
+     
+     
+     
+     
+\begin{frame}{Teorema de Clasificación}
+    
+Autores: Definen el formalismo Y dan con la Clasificación completa:   
+        \begin{itemize}
+            \item  Clase $M^1_\gamma$ (Álgebra de matrices reales simétricas).
+            \item  Clase $M^2_\gamma$ γ (Álgebra de matrices complejas hermíticas).
+            \item  Clase $M^4_\gamma$ γ (Álgebra de matrices cuaterniónicas hermíticas).
+            \item  Clase de Factores de Espín $V_n$ (álgebras de formas bilineales o álgebras de espín).
+            \item $Clase$ $M^8_3$ (Álgebra de matrices hermíticas de orden 3 sobre Octoniones).
+        \end{itemize}
+        \pause
+        
+        Posibilidad de coeficientes:
+        \begin{itemize}
+            \item Real ($\mathbb{R}$)
+            \item Complejo ($\mathbb{C}$)
+            \item Cuaterniónico ($\mathbb{H}$)
+            \item Octoniónico ($\mathbb{O}$)
+        \end{itemize}
+    
+\end{frame}
+
+
+
+\begin{frame}{Análisis de los cambios del modelo}
+ \begin{itemize}
+    \item Limitzaciones:
+    \begin{itemize}
+        \item Restricción al caso finito
+    \end{itemize}
+    \pause
+
+    \item Mejoras
+    \begin{itemize}
+        \item Eliminación de $\mathbb{C}$
+        \item Fin de la asociativida.
+        \item Comportamiento 100\% físico
+        \item Mapa estrcutural definitivo para operadores
+        \item Desacarte de la necesidad de $\mathscr{H}$.
+    \end{itemize}
+
+ \end{itemize}
+    
+\end{frame}
+
+
+
+
+
+\begin{frame}{La formulación para dimensión infinita (1940-1950)}
+
+\begin{itemize}
+Para esta nueva formulación I.E. Segal propone:
+    \item  Postulados algebraicos y métricos
+    \pause
+    
+    \item Descarte de la neceisdad de la estructura de Hilbert
+    \pause
+    
+    \item Paso a dimensión infinita con 
+    \begin{itemize}
+        \item Convergencia
+        \item Topología
+        \item Norma
+    \end{itemize}
+    \pause
+
+    \item Una nueva axiomática:
+        \begin{itemize}
+            \item Suma: $A + B \in \mathcal{A}$
+            \item Potencias: $A^n \in \mathcal{A}$
+            \item Producto por escalar:$\lambda A \in \mathcal{A}$
+            \item Existencia de una norma $||\cdot||$:
+        \end{itemize}
+\end{itemize}
+    
+\end{frame}
+
+
+\begin{frame}{La formulación para dimensión infinita (1940-1950)}
+\begin{itemize}
+    \item Estados: funcionales lineales sobre el álgebra que toman valores y que verifican:
+    \begin{itemize}
+        \item $\omega(U^2)\geq0$
+        \item $\omega(I)=1$
+    \end{itemize}
+    \pause
+
+    \item Estado Puro
+    \pause
+    
+    \item Valor esperado para un observable $U$ es $\omega(U)$
+    \pause
+
+    \item Completitud de estados puros 
+    \pause
+
+    \item Resultado fundamental para la distinción de obersvables
+    \pause
+    \item Álgebra para esta formulación $C^*-álgebra$
+    \pause
+\end{itemize}
+    
+\end{frame}
+
+
+
+
+
+
+
+
+
+\begin{frame}{\textit{C$^*$-álgebra}}
+
+\begin{itemize}
+Definidas por I. Gelfand y M. Naimark
+
+    \item Se trata de un álgebra $\mathcal{A}$ sobre el cuerpo $\mathbb{C}$
+    \pause
+
+    \item Adición de una norma $||\cdot||$ (completa)
+    \pause
+
+    \item Involución \qquad $*: A \to A$ tal que $x \mapsto x^*$
+    \pause
+
+    \item Propiedades a cumplir
+    \begin{itemize}
+        \item $||xy|| \le ||x|| ||y||$
+        \item $||x^* x|| = ||x||^2$
+    \end{itemize}
+    
+    \item Existe la posibilidad de obtener una $C^*$-álgebra real.
+\end{itemize}
+
+\vspace{0.3cm} % Espacio adicional de separación
+\begin{center}
+    \includegraphics[height=3cm]{GELFAND.png}
+    \hspace{1cm} % Espacio de separación entre ambas fotos
+    \includegraphics[height=3cm]{NAIMARK.png}
+\end{center}
+
+\end{frame}
+
+
+
+
+
+
+\begin{frame}{Propiedades del modelo}
+
+\begin{itemize}
+    \item Asociatividad
+    \item \textit{Simultaneaidad de observables} \iff \textit{Observables conmutan}
+    \pause
+
+    \item Limitaciones
+    \begin{itemize}
+        \item Pérdida de significado físico
+        \item Lejanía con la realidad
+    \end{itemize}
+    \pause
+
+    \item Mejoras
+    \begin{itemize}
+         \item Habilitación a dimensión infinita
+         \item Propiedades físicas atribuidas a la topología y el álgebra y bien definidas
+         \item Compatibilidad con $\mathscr{H}$
+    \end{itemize}
+
+
+\end{itemize}
+    
+\end{frame}
+
+
+
+\begin{frame}{El modelo definitivo}
+\begin{itemize} 
+    \item Alfen y Shultz toman el relevo de Segal
+    \pause
+    
+    \item Partiendo de los axiomas:
+            \begin{itemize}
+            \item Suma: $A + B \in \mathcal{A}$
+            \item Potencias: $A^n \in \mathcal{A}$
+            \item Producto por escalar:$\lambda A \in \mathcal{A}$
+            \item Existencia de una norma $||\cdot||$:
+        \end{itemize}
+
+    \item Incluyendo la dimensión infinta
+    \item Estructura final: \textbf{JB-álgebra}
+\end{itemize}
+    
+\end{frame}
+
+
+
+
+
+
+
+\begin{frame}{El modelo definitivo}
+    \begin{itemize}
+        \item Alfsen y Shultz toman el relevo de Segal
+        \pause
+        
+        \item Partiendo de los axiomas:
+        \begin{itemize}
+            \item Suma: $A + B \in \mathcal{A}$
+            \item Potencias: $A^n \in \mathcal{A}$
+            \item Producto por escalar: $\lambda A \in \mathcal{A}$
+            \item Existencia de una norma $||\cdot||$:
+        \end{itemize}
+        \pause
+        
+        \item Incluyendo la dimensión infinita
+        \item Estructura final: \textbf{JB-álgebra}
+    \end{itemize}
+    
+    \vspace{0.4cm} % Añade un poco de espacio tras el texto
+    
+    \begin{center}
+        % Ajusta el 'height' o 'width' si necesitas que sean más grandes o pequeñas
+        \includegraphics[height=3.5cm]{ALFSEN.png}
+        \hspace{1.5cm} % Modifica este valor para acercar o alejar las imágenes entre sí
+        \includegraphics[height=3.5cm]{SCHULTZ.png}
+    \end{center}
+\end{frame}
+
+
+
+
+
+\begin{frame}{JB-álgebra}
+
+    \begin{itemize}
+        Definidas por Alfsen y Schultz en colaboración con E. Størmer
+        \item Se trata de un álgebra $\mathcal{A}$ sobre $\mathbb{R}$
+        \item Añadiendo una norma $||\cdot||$ \textit{completa}
+        \pause
+        
+        \item Propiedades:
+        \begin{itemize}
+            \item Submultiplicatividad de la norma $\|a \circ b\| \leq \|a\|\|b\|$
+            \item Identidad isométrica $\|a^2\| = \|a\|^2$
+            \item Condición de positividad $\|a^2\| \leq \|a^2 + b^2\|$
+        \end{itemize}
+    \end{itemize}
+    
+    \vspace{0.4cm} % Espacio vertical antes de la imagen
+    
+    \begin{center}
+        % Asegúrate de que el archivo STORMER.png esté en la misma carpeta
+        \includegraphics[height=3.5cm]{STORMER.png}
+    \end{center}
+
+\end{frame}
+
+
+
+
+
+
+\begin{frame}{Propiedades del Modelo Defintivo}
+
+\begin{itemize}
+    \item Estados, estados puros, espectro, medición simultanea
+    \pause
+    
+    \item Estructura para los operadores: JB-álgebras
+    \textit{¿Cuál es la estructura algebraica subyacente que describe los
+    observables de forma más rigurosa?}
+    \pause
+
+    \item Añaden la dimensión infinita
+    \item Sin limitaciones o fallos\\
+    \textit{¿Es posible encontrar una geometría en el espacio de estados
+de los observables que genere dicha estructura algebraica}
+
+    \item Alfen Shultz:
+    \begin{itemize}
+        \item Axiomatizan el Espacio de Estados
+        \item Extraen información de los Observables sobre los estados
+        \item Obtienen los observables a partir de los estados    \end{itemize}
+        
+\end{itemize}
+
+    
+\end{frame}
+
+
+
+
+\begin{frame}{Tabla comparativa Modelos}
+    \scriptsize % Reducimos un punto más el tamaño de la letra
+    \renewcommand{\arraystretch}{1.3} % Ajustamos un poco el interlineado
+    
+    % Añadimos >{\raggedright\arraybackslash} antes de la X para alinear a la izquierda y evitar guiones raros
+    \begin{tabularx}{\textwidth}{@{} >{\bfseries}l *{4}{>{\raggedright\arraybackslash}X} @{}}
+        \toprule
+        Característica & \textbf{1ª Formulación} & \textbf{2ª Formulación} & \textbf{3º Formulación} & \textbf{4º Formulación} \\
+        \midrule
+        Estados & $\mathcal{H}$ & - & Funcionales lineales & Funcionales lineales \\
+        Operadores & $\mathcal{B}(\mathcal{H})$ & Álgebra de Jordan & C*-álgebra & JB-álgebra \\
+        Cuerpo & $\mathbb{C}$ & $\mathbb{R}$ & $\mathbb{C}$ & $\mathbb{R}$ \\
+        Dimensión & Infinito ($\infty$) & Finita & Infinita & Infinita \\
+        Conmutativo & No & Sí & No & Sí \\
+        Limitaciones & Sin justificación física ($\mathbb{C}$ y asociatividad) & Restricción a caso finito & Pérdida de significado físico & Sin limitaciones \\
+        Mejoras & Unificación & Sin $\mathbb{C}$ y sin asociatividad & Dimensión infinita & Dim. infinita al modelo real \\
+        \bottomrule
+    \end{tabularx}
+\end{frame}
+
+
+
+
+
+
+
+
+\begin{frame}{Conclusiones}
+    \begin{itemize}
+        \item \textbf{Enfoque del trabajo:} 
+        \begin{itemize}
+            \item Conectar la profunda abstracción matemática de la mecánica cuántica con la intuición física.
+            \item Un esfuerzo enriquecedor para dimensionar la evolución histórica de estos modelos.
+        \end{itemize}
+        
+        \vspace{0.3cm} % Espacio extra para separar los bloques
+  
+        
+        \item \textbf{P1: ¿Estructura algebraica subyacente para los observables?}
+        \begin{itemize}
+            \item La estructura definitiva son las \textbf{JB-álgebras} (sobre $\mathbb{R}$ y en dimensión infinita).
+            \item Elimina artificios (como la asociatividad impuesta y el uso de $\mathbb{C}$), logrando un modelo fiel a la realidad del laboratorio.
+        \end{itemize}
+        
+        \vspace{0.3cm}
+
+
+        \item \textbf{P2: ¿Geometría en el espacio de estados?}
+        \begin{itemize}
+            \item Sí, gracias a la \textbf{axiomatización del Espacio de Estados} (Alfsen y Shultz).
+            \item Se deduce la estructura de los observables directamente a partir de la geometría de los estados puros.
+            \item Se le devuelve el protagonismo a la Física (lo que medimos) frente a la Matemática pura.
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+
+
+\end{document}
+

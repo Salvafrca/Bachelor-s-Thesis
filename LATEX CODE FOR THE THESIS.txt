@@ -1,0 +1,781 @@
+\documentclass[11pt,a4paper,twoside,pdf]{article}
+% Paquetes (añade otros si los necesitas):
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsthm}
+\newtheorem{definition}{Definición}
+\newtheorem{theorem}{Teorema}
+\newtheorem{corollary}{Corolario}
+\newtheorem{example}{Ejemplo}
+\usepackage[pdftex,final]{graphicx}
+% Style package
+% Font Package (Palatino)
+\usepackage{mathpazo}
+\usepackage{comment}
+% Packages for specific capabilities
+\usepackage{rotating} % for text rotation in tables
+\usepackage{multirow} % for multirow in tables
+\usepackage{subfigure} % Place subfigures in figure environment
+% Packages for specific symbols
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{eurosym} % Euro symbol
+\usepackage{bbding} % for \XSolidBrush
+\usepackage{pifont} % for \ding{55} (a check mark)
+\usepackage{latexsym}
+\usepackage{soul}
+\usepackage{array}
+%\usepackage{marvosym}
+\usepackage{epsfig}
+\usepackage{graphics}
+\usepackage{amsfonts}
+\usepackage{xspace}
+\usepackage{color}
+\usepackage{booktabs}
+\usepackage{xtab}
+\usepackage[colorlinks=true,urlcolor=blue,linkcolor=blue,citecolor=blue]{hyperref}
+\numberwithin{equation}{section}
+\linespread{1.05}
+% TFG en inglés:
+%\usepackage[english]{babel} 
+%\addto\captionsenglish{\renewcommand{\chaptername}{}}
+% TFG en español:
+\usepackage[spanish,es-nodecimaldot,es-tabla,es-lcroman,es-nosectiondot,
+            es-noindentfirst]{babel}
+\renewcommand\spanishchaptername{}
+% Formato de la página:
+\usepackage{fancyhdr}
+\usepackage[top=2.88cm,bottom=2.97cm,left=2.95cm,right=2.95cm]{geometry}
+\setlength{\parskip}{0.1cm}
+% Pon aquí tus definiciones:
+\newcommand{\dis}{\displaystyle}
+%\sodef\an{}{.2em}{1em plus1em}{2em plus.1em minus.1em}
+\begin{document}
+% Portada %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{empty}
+\noindent
+\begin{tabular}{r}
+\includegraphics[width=8.8cm]{escudoUGRmonocromo.png} \\[-1.8ex]
+\hspace{31mm}\vspace{-8mm}
+\begin{tabular}{c}
+\hline\\[-1ex]\hskip-2mm
+{\bf Facultad de Ciencias}\hspace{18mm}
+\end{tabular}
+\end{tabular}
+
+\large
+\vspace{30mm}
+\hspace{25mm}
+\begin{tabular}{l}
+GRADO EN F\'ISICA
+\end{tabular}
+
+\vspace{45mm}
+\hspace{25mm}
+\begin{tabular}{l}
+TRABAJO FIN DE GRADO
+\\[1.5ex]
+\LARGE\bf GEOMETRÍA DEL ESPACIO DE ESTADOS\\
+\LARGE\bf Y MECÁNICA CUÁNTICA
+\end{tabular}
+%
+\vfill
+\hspace{25mm}
+\begin{tabular}{l}
+Presentado por:
+\\
+{\bf Salvador Franco Castilla}
+\\[3ex]
+Curso Académico 2025/2026
+\end{tabular}
+%
+\newpage
+%
+\clearpage
+\thispagestyle{empty} % Quitamos el número de página
+\vspace*{2cm} % Pequeño espacio superior para que no quede pegado al borde
+% Agradecimiento principal centrado horizontalmente
+\begin{center}
+    \textit{Mamá, Mariam, Paco, gracias.}
+\end{center}
+\vspace{1.5cm} % Espacio en blanco entre las dos frases
+% Frase en latín alineada a la derecha
+\begin{flushright}
+    \textit{Ad astra per aspera.}
+\end{flushright}
+\clearpage
+
+
+
+\begin{center}
+
+{\bf Resumen}
+
+\bigskip
+\begin{minipage}{0.8\linewidth}
+\hspace{\parindent} Si la mecánica cuántica se hubiera quedado en el formalismo dado por los espacios de Hilbert, hoy no tendríamos los resultados que tenemos ni hubiéramos sido capaces de unirla con la relatividad, física de partículas y nuclear. Por eso en este trabajo vamos a presentar la evolución de la matemática detrás de la teoría de la que los físicos más orgullosos podemos estar.
+Se tendrá en cuenta en todo momento el contexto histórico de cada avance y la autoría de los resultados.
+Acompañaremos los resultados y las definiciones con ejemplos para tener un recorrido más ameno.
+Durante este camino nos toparemos con álgebras de Jordan Euclidas, $C^*$-álgebras, y  JB-álgebras. Estas últimas se pueden considerar como el marco matemático definitivo para describir los sistemas de observables. 
+Finalmente presentaremos una caracterización de las JB-álgebras a través de la geometría del espacio de sus estados.
+\end{minipage}
+
+
+\vfill
+
+{\bf Abstract} 
+
+\bigskip
+\begin{minipage}{0.8\linewidth}
+\hspace{\parindent} If quantum mechanics had remained within the formalism provided by Hilbert spaces, today we would not have the results we have, nor would we have been able to unify it with relativity, particle physics, and nuclear physics. For this reason, in this work we will present the evolution of the mathematics behind the theory of which we physicists can be most proud.
+The historical context of each advancement and the authorship of the results will be taken into account at all times.
+We will accompany the results and definitions with examples to make the journey more enjoyable.
+Along this path, we will encounter Euclidean Jordan algebras, $C^*$-algebras, and JB-algebras. The latter can be considered the definitive mathematical framework for describing systems of observables.
+Finally, we will present a characterization of JB-algebras through the geometry of their state space.
+\end{minipage}
+\vfill
+\end{center}
+\pagebreak
+% Indice %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newpage
+\tableofcontents
+% Texto %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newpage
+\pagestyle{fancy}
+\fancyhead[RO,LE]{\leftmark}
+\fancyhead[LO,RE]{\thepage}
+\fancyfoot{}
+\pagebreak
+\section{INTRODUCCIÓN}
+\hspace{\parindent} La mecánica cuántica estudia sistemas físicos cuyo comportamiento escapa a las leyes de la mecánica clásica. Para estudiar y extraer información de dichos sistemas se utilizan los \textit{observables}, entidades que matemáticamente se representan como operadores aplicados sobre el estado del sistema. Es de vital importancia caracterizar qué tipo de observables existen y cuáles son sus propiedades empíricas, lo que conduce directamente a las preguntas fundamentales de este trabajo: \textit{¿cuál es la estructura algebraica subyacente que describe los observables de forma más rigurosa?} y \textit{¿Es posible encontrar una geometría en el espacio de estados de los observables que genere dicha estructura algebraica?} Este Trabajo de Fin de Grado aborda estas cuestiones desde una perspectiva tanto teórica como histórica, describiendo además las distintas estructuras que han ido apareciendo.
+\medskip
+
+Como se detallará a lo largo del texto, no todas las operaciones matemáticas entre operadores tienen una interpretación física directa. Por ejemplo, tiene pleno sentido físico definir nuevos observables a partir de la multiplicación por un escalar real, la suma de dos observables, o las potencias de un único observable (y como consecuencia, evaluar un polinomio dependiente de un solo observable $A$). Sin embargo, carece de significado empírico evaluar un polinomio que involucre dos o más observables simultáneamente, ya que el Principio de Incertidumbre prohíbe, en general, su medición conjunta (a menos que conmuten).
+
+Por tanto, las propiedades operacionales básicas que deben exigirse a cualquier estructura algebraica de observables empíricos son:
+\begin{itemize}
+    \item Admitir la multiplicación por un escalar: \, $\lambda A$ \hspace{0.1cm} (con $\lambda \in \mathbb{R}$).
+    \item Admitir potencias de un operador para formar nuevos observables: \, $A^n$ \, (con $n \in \mathbb{N}$).
+    \item Admitir la suma de observables: \,  $A + B$.
+\end{itemize}
+La búsqueda de un álgebra que cumpla estrictamente estos postulados físicos sin añadir estructuras artificiales es lo que motivó el desarrollo de la teoría de álgebras no asociativas, desembocando en las llamadas álgebras de Jordan. 
+
+A lo largo del siglo XX, el formalismo cuántico sufrió profundas transformaciones matemáticas. Esta evolución no siempre discurrió de manera paralela a las necesidades de la física teórica, atravesando periodos de estrecha colaboración, separaciones temporales y, finalmente, un reencuentro contemporáneo.
+
+\subsection{1925–1932: El nacimiento del formalismo estándar (Espacio de Hilbert)}
+\hspace{\parindent} La primera estructura rigurosa utilizada para trabajar con el formalismo cuántico fue el \textit{Espacio de Hilbert}. A mediados de la década de 1920 existían dos teorías aparentemente distintas para describir los mismos fenómenos: la mecánica de Heisenberg (una teoría puramente matricial) y la mecánica ondulatoria de Schrödinger (basada en el uso de funciones). Fue el matemático húngaro-estadounidense John von Neumann quien, entre 1927-1930, resolvió esta aparente dicotomía al demostrar matemáticamente que ambas formulaciones eran, en realidad, representaciones isomórficas dentro del espacio de operadores lineales acotados sobre un mismo espacio abstracto lineal, complejo y provisto de producto interno, al que bautizó como espacio de Hilbert.
+
+A pesar de su aparente éxito unificando ambas teorías, es unos años después cuando el propio John von Neumann junto a Pascual Jordan y Eugene Wigner advirtieron sobre dos limitaciones graves: el formalismo dependía de los números complejos (sin justificación empírica en el laboratorio) y obligaba a aceptar el producto matricial asociativo $AB$, el cual carece de sentido físico si $A$ y $B$ no conmutan.
+
+\subsection{1934: Un nuevo formalismo (Las álgebras de Jordan)}
+\hspace{\parindent} En esta etapa, \textit{la matemática y la física caminan totalmente unidas}. Impulsados por las limitaciones del modelo basado en espacios de Hilbert, P. Jordan, J. von Neumann y E. Wigner publicaron en 1934 su revolucionario trabajo sobre el formalismo de la mecánica cuántica (ver \cite{Jo-Neu-Wi} y Figura \ref{fig:neumann_wigner}).
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=0.4\textwidth]{vonNeumann.webp}
+    \hspace{0.5cm}
+    \includegraphics[width=0.4\textwidth]{Eugene Wigner.webp}
+    \caption{John von Neumann (izq.) y Eugene Wigner (der.), pioneros en la formalización algebraica de la mecánica cuántica \cite{img_vonneumann, img_wigner}.}
+    \label{fig:neumann_wigner}
+\end{figure}
+
+La propuesta de estos autores consistió en estructurar los observables como cierto espacio vectorial real (eliminando de partida el problema de trabajar con números complejos). El objetivo fundamental era trabajar con álgebras reales y además deshacerse del producto asociativo artificial, el cual no estaba justificado empíricamente. Dado que, desde el punto de vista físico, solo tiene sentido evaluar polinomios de un único observable (es decir, calcular sus potencias, como el cuadrado), dedujeron que es posible definir una nueva operación bilineal (un producto $\circ$ que posteriormente fue bautizado como producto de Jordan), utilizando exclusivamente sumas y cuadrados mediante la conocida identidad de polarización:
+\begin{equation}
+a \circ b = \frac{1}{4} \left[ (a+b)^2 - (a-b)^2 \right]
+\end{equation}
+Esta ingeniosa construcción matemática permite dotar al espacio vectorial de una estructura algebraica partiendo únicamente de operaciones con pleno significado físico (las potencias), sin necesidad de presuponer ni requerir la existencia de un producto matricial asociativo subyacente.  Estas nuevas estructuras recibieron posteriormente el nombre de álgebras de Jordan (ver apéndice \ref{A alg jordan} para su definición).  \\  
+ Jordan, von Neuman y Wigner describieron en \cite{Jo-Neu-Wi} todas las algebras de Jordan formalmente reales en dimensión finita (un álgebra es formalmente real si es un álgebra no degenerada; es decir; las sumas de los cuadrados de los elementos no se anulan salvo en caso trivial). Las álgebras formalmente reales de dimensión finita también reciben el nombre de álgebras de Jordan Euclídeas.
+
+\subsection{1940s-1950s: El salto a la dimensión infinita ($C^*$-álgebras)}
+\hspace{\parindent} El gran reto tras 1934 era dar \textit{el salto a la dimensión infinita}, indispensable para modelar observables continuos como la posición y el momento. En este periodo se produce una división de caminos. En 1947, I.E. Segal ofrece en \cite{Segal} una solución axiomática para la dimensión infinita.
+En esta formulación algebraica de la mecánica cuántica, el sistema físico se define abstractamente por una $C^*$-álgebra (ver apéndice \ref{Cestrella} para su definición) en cuyo marco los elementos autoadjuntos ($x=x^*$) representan los observables del sistema. La definición original de $C^*$-álgebra se debe a I. Gelfand y  M. Nairmark (ver \cite{Gelf-Nai}).
+
+A diferencia de las álgebra de Jordan finitas anteriormente estudiadas en \cite{Jo-Neu-Wi}, la potente estructura topológica (con norma completa) de las $C^*$-álgebras es lo que permite transitar de forma matemáticamente segura hacia espacios de dimensión infinita (operadores y matrices infinitas). Esta transición resulta imprescindible, pues la completitud del espacio permite definir con rigor los límites necesarios para sumar series infinitas, establecer el espectro de los observables y definir los estados del sistema como funcionales lineales positivos. De este modo, Segal demostró que las propiedades medibles de los sistemas físicos podían deducirse directamente de cierta topología y el álgebra, sin necesidad de asumir la existencia de un espacio de Hilbert a priori.
+
+Aunque fue un logro analítico monumental, este enfoque retomaba la estructura del producto asociativo (dejando a un lado la estructura de Jordan). Así, la matemática abstracta avanzó creando la vasta teoría de álgebras de operadores, mientras los físicos prácticos se mantuvieron fieles al modelo de Dirac y von Neumann.
+
+\subsection{1970s-Actualidad: Regreso a los orígenes (JB-álgebras)}
+\hspace{\parindent} A finales de la década de 1970, se produce \textit{el reencuentro entre la axiomática de la cuántica y las estructuras de Jordan}. Las matemáticas habían desarrollado herramientas topológicas y de geometría convexa lo suficientemente sofisticadas como para generalizar las estructuras de Jordan von Neumann y Wigner a dimensión infinita con la definición de las JB-álgebras (álgebras de Jordan-Banach). Dichas estructuras fueron introducidas en \cite{A-S-S}.\medskip
+
+Estos avances permitieron asentar rigurosamente el caso infinito manteniendo la naturaleza conmutativa, no necesariamente asociativa y empírica exigida por los postulados originales, dotándola además de una norma de Banach (completa). Las JB-álgebras representan, por tanto, el marco matemático moderno definitivo (sin dejar ningún caso fuera) para describir sistemas cuánticos de observables reales. \medskip
+
+
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[height=5.5cm]{NEUMANN.jpeg}
+    \hfill
+    \includegraphics[height=5.5cm]{WIGNER.jpeg}
+    \caption{Jordan von Neumann y Eugene Paul Wigner.}
+    \label{fig:dinamica}
+\end{figure}
+
+
+
+Además, la conexión entre ambos mundos (el asociativo y el Jordan) es directa y constructiva: si consideramos una $C^*$-álgebra (con su producto asociativo usual) y nos restringimos al subespacio de sus elementos autoadjuntos, al dotar a este espacio real del producto simetrizado de Jordan, la estructura resultante se convierte automáticamente en una JB-álgebra (ver ejemplos en el apéndice \ref{Ejemplos**}). De este modo, se vincula de manera natural y rigurosa el análisis funcional contemporáneo con la visión puramente algebraica y empírica de 1934.\medskip
+
+ En uno de sus trabajos culminantes E.M. Alfsen y F.W. Shultz lograron en 2003 caracterizar los sistemas cuánticos a través de la geometría de su espacio de estados (ver \cite{Al-Sch}). Esta caracterización permite responder a una de las preguntas clave de este trabajo de fin de grado (si se podía encontrar una geometría en el espacio de estados de los observables que genere la estructura algebraica necesaria para la mecánica cuántica).   
+
+\subsection*{AVANCE}
+\hspace{\parindent }Tras esta primera sección introductoria, el trabajo se estructura en tres bloques principales que detallan la evolución del formalismo matemático de la mecánica cuántica. \\
+En primer lugar, la Sección 2 aborda la búsqueda de una estructura matemática válida para cualquier sistema cuántico utilizando para ello álgebras de Jordan (no asociativas). Además se obtiene en el caso finitodimensional un teorema de clasificación, prestando especial atención a las implicaciones físicas del álgebra excepcional $M_3^8$.\\
+Partiendo de esta generalización algebraica, la Sección 3 expone la transición desde el modelo tradicional dependiente de los espacios de Hilbert hacia una formulación estrictamente operacional. En ella se detalla el desarrollo axiomático impulsado por von Neumann y Segal para deducir propiedades esenciales como la conmutatividad, el espectro de los observables, observabilidad simultánea así como los estados y los estados puros del sistema.\\
+Acercándose a la perspectiva contemporánea a partir de estos postulados, la Sección 4 analiza la teoría de Alfsen y Shultz, mostrando cómo la geometría convexa del espacio de estados determina unívocamente la estructura de los observables físicos. \\
+Finalmente, se incluye una sección dedicada a las conclusiones (Sección 5) y un Apéndice donde se definen con detalle las estructuras algebraicas utilizados a lo largo del texto.
+\addcontentsline{toc}{subsection}{Avance}
+
+
+
+\section{UNA GENERALIZACIÓN ALGEBRAICA DEL FORMALISMO MECÁNICO CUÁNTICO}
+\hspace{\parindent} Para comprender el propósito de esta sección de una manera sencilla, podemos verla como un recorrido por los cimientos matemáticos que permitieron generalizar el formalismo de la mecánica cuántica. En concreto, presentaremos y analizaremos los resultados principales de dos artículos históricos clave (ver \cite{Jo-Neu-Wi} y \cite{SoloJordan}). \\
+En primer lugar, abordaremos el trabajo en solitario de Jordan (ver \cite{SoloJordan}), el cual constituye el germen de lo que hoy conocemos como las álgebras de Jordan. En dicho trabajo, Jordan mostró que el carácter estadístico de las medidas cuánticas podía expresarse de forma mucho más natural mediante un álgebra que conserva la conmutatividad de los observables, aunque para ello haya que renunciar a la propiedad asociativa. 
+\hspace{\parindent} En segundo lugar, analizaremos el célebre artículo conjunto de Jordan, von Neumann y Wigner \cite{Jo-Neu-Wi}, donde se consolidan estas ideas y se establecen las bases teóricas de las álgebras de Jordan formálmente reales de dimensión finita. Dicho trabajo tenía como objetivo principal encontrar una estructura algebraica que sirviera para cualquier sistema cuántico, logrando así la ansiada generalización del formalismo matemático que emplea la mecánica cuántica. La motivación para buscar este nuevo marco teórico surgió de las dificultades que aparecían al intentar describir ciertos fenómenos relativistas y nucleares, lo que hizo evidente la necesidad de plantear estructuras matemáticas más generales y robustas que las proporcionadas por las matrices convencionales.
+
+\subsection{El álgebra de Jordan} \label{Algebra de Jordan} 
+\hspace{\parindent} El punto de partida de esta formulación surge de la necesidad de adaptar las matemáticas subyacentes de la mecánica cuántica para que reflejen exclusivamente aquellas operaciones empíricas que tienen un significado estadístico y físico directo en el laboratorio. Para lograrlo, Jordan, von Neumann y Wigner proponen una nueva estructura matemática fundamental: referida originalmente como álgebra de números r o álgebra  de Jordan Euclídea. El origen de esta estructura radica en tomar un sistema clásico, como el de las matrices, restringirlo al cuerpo de los números reales para evitar ambigüedades físicas y redefinir su multiplicación. \medskip
+
+A diferencia de la formulación cuántica tradicional (que emplea estructuras asociativas pero no conmutativas), esta nueva álgebra hace exactamente lo contrario: garantiza la conmutatividad de los observables mediante una «cuasi-multiplicación», pero sacrifica a cambio la ley asociativa general. \medskip
+
+Concrétamente podemos destacar los tres pilares de esta formulación:
+\begin{itemize}
+    \item Se trabaja con un \textit{álgebra de Jordan} $A$ (véase \ref{A alg jordan} para su definición). El producto de $A$ es conmutativo, pero no necesariamente asociativo.
+    \item \label{Formalmente Real} El álgebra $A$ es \textit{formálmente real}; es decir; $$A^2 + B^2 + C^2 + \ldots = 0 \Longleftrightarrow A=B=C=\ldots =0$$
+    \item $A$ es \textit{finito-dimensional}
+\end{itemize}
+Como enfoque alternativo, los autores proponen la posibilidad de prescindir del producto $ab$ como operación fundamental y basar la estructura únicamente en el uso de las potencias de un elemento $(a^{\mu})$. Bajo esta perspectiva, el producto entre dos observables se recupera a partir de sus cuadrados mediante la identidad $ab = \frac{1}{2}((a+b)^{2} - a^{2} - b^{2})$, lo cual presenta la ventaja de garantizar automáticamente la conmutatividad de la operación.
+
+\subsection{Teorema de Clasificación de Jordan-von Neumann-Wigner}
+\hspace{\parindent} El propósito último de \cite{Jo-Neu-Wi} no era simplemente proponer un conjunto de axiomas abstractos, sino determinar de manera exhaustiva qué estructuras matemáticas concretas satisfacen las condiciones físicas requeridas para actuar como observables cuánticos. El resultado culminante de esta investigación es el conocido como \textit{Teorema de Clasificación de Jordan-von Neumann-Wigner}, el cual establece el mapa estructural definitivo de todas las álgebras estadísticamente válidas y de dimensión finita.
+
+Para comprender el alcance conceptual de este resultado, resulta indispensable recordar la noción de \textit{irreducibilidad}:
+\begin{definition}[\textbf{Álgebra irreducible}]
+Un álgebra $A$ se denomina irreducible si no contiene ninguna subálgebra invariante propia (distinta de la trivial $0$ y la propia $A$).
+\end{definition}
+
+Es decir, en un álgebra irreducible no existe ninguna subálgebra $0 \neq \mathcal{B} \subsetneq A$ tal que, para todo elemento $a \in A$ y $b \in \mathcal{B}$, el producto verifique $ab \in \mathcal{B}$. Físicamente, esta propiedad caracteriza a un sistema cuántico elemental que no puede descomponerse en subsistemas independientes.
+
+\textit{Ejemplo ilustrativo de álgebra irreducible} consideremos la clase $M_2^2(\mathbb{C})$, que corresponde al álgebra de matrices complejas hermíticas de orden $2 \times 2$ dotada del producto simétrico de Jordan:
+\begin{equation}
+A \circ B = \frac{1}{2}(AB + BA)
+\end{equation}
+Cualquier elemento de esta estructura puede expresarse como una combinación lineal con coeficientes reales de la matriz identidad $I$ y las tres matrices de Pauli ($\sigma_x, \sigma_y, \sigma_z$). Desde una perspectiva física, $M_2^2(\mathbb{C})$ constituye un álgebra irreducible debido a que modela matemáticamente un \textit{qubit} (un sistema cuántico elemental de dos niveles, como el espín de un electrón). Su irreducibilidad refleja que el \textit{qubit} actúa como una unidad fundamental e indivisible de información cuántica que no puede descomponerse en subsistemas independientes.
+
+Asimismo, esta estructura es idónea para evidenciar de manera explícita la pérdida de la propiedad asociativa general. Debido a que las matrices de Pauli anticonmutan entre sí, el producto de Jordan entre $\sigma_x$ y $\sigma_y$ es nulo ($\sigma_x \circ \sigma_y = 0$). Sabiendo además que $\sigma_x^2 = I$, si evaluamos el comportamiento del asociador para estos elementos se obtiene, por un lado:
+\begin{equation}
+(\sigma_x \circ \sigma_x) \circ \sigma_y = I \circ \sigma_y = \sigma_y
+\end{equation}
+mientras que, por el otro:
+\begin{equation}
+\sigma_x \circ (\sigma_x \circ \sigma_y) = \sigma_x \circ 0 = 0
+\end{equation}
+Dado que $\sigma_y \neq 0$, queda demostrado que $(\sigma_x \circ \sigma_x) \circ \sigma_y \neq \sigma_x \circ (\sigma_x \circ \sigma_y)$, lo que expone de forma empírica la naturaleza inherentemente no asociativa de este formalismo.
+
+Una vez ilustrada esta propiedad mediante el ejemplo anterior, el \textit{teorema fundamental de clasificación} se enuncia de la siguiente manera:
+\begin{theorem}[\textbf{Clasificación de Jordan-von Neumann-Wigner}] \label{Teoremaco}
+Cualquier álgebra de Jordan de dimensión finita y formalmente real puede expresarse de manera única como la suma directa de álgebras de Jordan simples e irreducibles. Asimismo, dichas álgebras irreducibles pertenecen exclusivamente a una de las siguientes cinco clases:
+\end{theorem}
+\begin{enumerate}
+    \item \textit{Clase $M_\gamma^1$ (Álgebra de matrices reales simétricas):} 
+    Compuesta por el conjunto de matrices simétricas de orden $\gamma \times \gamma$ con coeficientes pertenecientes al cuerpo de los números reales ($\mathbb{R}$). La operación interna es la creada por Jordan  $a \circ b = \frac{1}{2}(ab + ba)$. Su dimensión como espacio vectorial real es $\frac{1}{2}\gamma(\gamma+1)$.
+    
+    \item \textit{Clase $M_\gamma^2$ (Álgebra de matrices complejas hermíticas):} 
+    Definida sobre el cuerpo de los números complejos ($\mathbb{C}$), consiste en matrices de dimensión $\gamma \times \gamma$ que coinciden con su transpuesta conjugada ($A = A^\dagger$). Dotada del producto simétrico Jordan (el mismo del caso anterior), esta estructura posee una dimensión como espacio vectorial real de $\gamma^2$ y constituye el esqueleto matemático estándar de la mecánica cuántica convencional en Espacios de Hilbert tradicionales de dimensión finita tal y como se ve en la asignatura de Métodos Matemáticos III.
+    
+    \item \textit{Clase $M_\gamma^4$ (Álgebra de matrices cuaterniónicas hermíticas):} 
+    Estructurada sobre el cuerpo no conmutativo de los cuaterniones ($\mathbb{H}$). Se compone de matrices de orden $\gamma \times \gamma$ autoadjuntadas respecto al conjugado cuaterniónico, esto significa, que si un cuaternión es una combinación lineal de $1, i, j, k$ tenemos que el conjugado de $1, i, j, k$ es $1, -i, -j, -k$ respectivamente. Aunque los cuaterniones no conmuten, el producto de Jordan hace que esta álgebra sí sea conmutativa. Su dimensión es $\gamma(2\gamma-1)$.
+    
+    \item \textit{Clase de Factores de Espín $V_n$ (álgebras de formas bilineales o álgebras de espín):} A diferencia de las clases matriciales anteriores, esta familia de dimensión $n+1$ se construye directamente a partir de un espacio vectorial real dotado de una forma bilineal simétrica y definida positiva $\langle \cdot, \cdot \rangle$. Está compuesta por elementos de la forma $(\alpha,v)$ con $\alpha \in \mathbb{R}$, $v\in  \mathbb{R}^n $ que se multiplican mediante la regla:
+    \begin{equation}
+    (\alpha,v) \circ (\beta,w) = (\alpha\beta + \langle v,w\rangle, \alpha w + \beta v)
+    \end{equation}
+    Físicamente, estas álgebras modelan de forma exacta los sistemas de espín cuántico y las propiedades de las matrices de Pauli, manteniendo una conexión estructural profunda con las Álgebras de Clifford. Un ejemplo clásico de medición de estos estados empíricos es el experimento de Stern-Gerlach (ver Figura \ref{fig:stern}), donde la cuantización espacial del espín se hace evidente.
+    
+    \begin{figure}[htpb]
+        \centering
+        \includegraphics[width=0.6\textwidth]{STERM GERLACH.PNG}
+        \caption{Representación esquemática del experimento de Stern-Gerlach \cite{img_stern}.}
+        \label{fig:stern}
+    \end{figure}
+
+   \item \textit{Clase $M_{3}^{8}$ (Álgebra de matrices hermíticas de orden 3 sobre Octoniones):} Constituida por matrices de orden $3 \times 3$ cuyos coeficientes pertenecen al álgebra de los octoniones o números de Cayley ($\mathbb{O}$). Cabe detenerse brevemente en esta estructura subyacente: los números de Cayley constituyen una extensión matemática de 8 dimensiones de los números reales y representan la mayor (y última) de las cuatro álgebras de división normadas de dimensión finita sobre los reales (junto con $\mathbb{R}$, los complejos $\mathbb{C}$ y los cuaterniones $\mathbb{H}$). Su característica matemática más profunda, y la que confiere a esta clase matricial su naturaleza ``excepcional'', es que el producto entre octoniones no es conmutativo ni asociativo, cuya regla de multiplicación geométrica suele representarse mediante el Plano de Fano (ver Figura \ref{fig:octoniones}). Al formar matrices hermíticas de orden 3 con estos coeficientes y aplicarles el producto de Jordan, se obtiene un álgebra cuya dimensión como espacio vectorial real es estrictamente igual a 27 (correspondiente a 3 números reales en la diagonal principal y 3 octoniones independientes en las entradas restantes).
+   
+    \begin{figure}[htpb]
+        \centering
+        \includegraphics[width=0.4\textwidth]{OCTONIONES.png}
+        \caption{Plano de Fano, representación mnemotécnica del producto de octoniones \cite{img_octonion}.}
+        \label{fig:octoniones}
+    \end{figure}
+    
+\end{enumerate}
+
+\textbf{Reflexión Formal sobre el Álgebra Excepcional $M_3^8$ de Albert} 
+La presencia de la clase $M_3^8$ (denominada modernamente Álgebra de Albert en honor al matemático Abraham Adrian Albert) representa el fenómeno conceptual más profundo de todo el artículo de 1934. Mientras que las primeras cuatro familias de la clasificación se consideran álgebras de Jordan \textit{especiales} (lo que significa que su producto de Jordan proviene siempre de un producto asociativo subyacente, como el producto clásico de matrices), el álgebra $M_3^8$ es intrínsecamente \textit{excepcional}. Albert demostró de forma rigurosa que no existe absolutamente ningún álgebra asociativa global cuya álgebra de Jordan pueda generar a $M_3^8$.
+
+Esta naturaleza excepcional impone una serie de severas reflexiones físicas y matemáticas:
+\begin{itemize}
+    \item \textit{Imposibilidad de representación vectorial:} Al no provenir de una estructura asociativa subyacente, los observables de $M_3^8$ no pueden ser representados como operadores lineales actuando sobre vectores de un Espacio de Hilbert. Esto rompe por completo el dogma tradicional de la física cuántica elemental de Dirac.
+    
+    \item \textit{La restricción de dimensionalidad ($\gamma = 3$):} Un hecho fascinante es la clasificación dada en el teorema \ref{Teoremaco} limita esta estructura exclusivamente al orden $3 \times 3$. Intentar construir matrices hermíticas octoniónicas de orden $\gamma \ge 4$ destruye la identidad de Jordan:
+    \begin{equation}
+        (a^2 \circ b) \circ a = a^2 \circ (b \circ a)
+    \end{equation}
+    Debido a la falta de asociatividad de los octoniones, la estructura matemática ``colapsa'' a partir de la dimensión 4, dejando al espacio de 27 dimensiones de $M_3^8$ como una isla matemática única.
+    
+    \item \textit{Ventana a nueva física:} Para Jordan, von Neumann y Wigner, el descubrimiento de $M_3^8$ constituyó la única esperanza real de su trabajo para encontrar fenómenos cuánticos genuinamente nuevos que escaparan al alcance de la teoría de operadores ordinaria. 
+\end{itemize}
+
+\section{EL SALTO A LA DIMENSIÓN INFINITA}
+\hspace{\parindent} En el desarrollo tradicional de la mecánica cuántica, el espacio vectorial real de los operadores autoadjuntos acotados en un espacio de Hilbert se ha utilizado como el modelo matemático estándar para representar los observables. Sin embargo, en esta sección se aborda una formulación de la mecánica cuántica estrictamente operacional. Es decir, una teoría estructurada de tal forma que únicamente los observables físicos del sistema están involucrados en los postulados, alejándose de la dependencia estricta de los espacios de Hilbert.\medskip
+
+En el origen de esta nueva formulación destaca el trabajo seminal de J. von Neumann ver \cite{JvonNeuman}. En dicho artículo, von Neumann propone una generalización algebraica basada en las ideas de Jordan de centrarse exclusivamente en aquellas operaciones que tienen un significado físico directo.\medskip 
+
+Para evitar las severas restricciones físicas y matemáticas de los sistemas con una base lineal finita, von Neumann introdujo conjuntos de observables positivos ($\mathfrak{D}$) y acotados ($\mathfrak{U}$). Fue en la siguiente década (1940) donde Segal continuó a partir de las bases von Neumann y Jordan para llegar a estandarizar el modelo matemático introduciendo el concepto de $C^*$-álgebra.\medskip
+
+A través de postulados algebraicos y métricos, (basados en la teoría de álgebras de Banach) Segal comprueba que características objetivas como los estados puros, las distribuciones de probabilidad y el principio de indeterminación surgen de manera intrínseca.\medskip
+
+A lo largo de este apartado se mostrará cómo, a partir de estos postulados fundamentales y sin que ningún espacio de Hilbert juegue ningún papel en las demostraciones, se deducen las características principales de los estados estacionarios, se evidenciará que cada observable posee una resolución espectral, que los estados del sistema inducen distribuciones de probabilidad naturales, y que la observabilidad simultánea se da si y solo si los observables conmutan.
+\medskip
+
+Como avance de uno de los resultados culminantes de \cite{Segal}, se planteará que si estos postulados algebraicos abstractos se refuerzan lo suficiente, la colección de observables resulta ser isomórfica (algebraica y métricamente) al conjunto de operadores autoadjuntos acotados en un espacio de Hilbert. Este resultado final, íntimamente ligado a la construcción de Gelfand-Naimark-Segal (GNS), resolvió el gran rompecabezas matemático al garantizar que la abstracción algebraica siempre admite una representación fiel en dicho espacio, convirtiéndose en el corazón de la formulación moderna. 
+
+\subsection{Postulados Algebraicos y Métricos}
+\hspace{\parindent} Para formalizar esta teoría, definiremos un \textit{sistema} $\mathfrak{A}$ como una estructura matemática que satisface un conjunto específico de postulados. En esta formulación, los postulados se dividen en algebraicos (los dos primeros) y métricos (los restantes).
+Los postulados algebraicos, cuya estructura es análoga a la desarrollada previamente por Jordan, von Neumann y Wigner para las álgebras de observables (ver sección \ref{Algebra de Jordan}), requieren que un observable pueda ser multiplicado por números reales, elevado a potencias enteras, y que dos observables puedan ser sumados.
+\begin{enumerate}
+    \item $\mathfrak{A}$ es un espacio lineal real.
+    \item Existe en $\mathfrak{A}$ un elemento identidad $I$, y para cada observable $U \in \mathfrak{A}$ y cada entero positivo $n$, existe un elemento $U^n \in \mathfrak{A}$. Las reglas habituales para operar con polinomios de una variable con coeficientes reales siguen siendo válidas cuando la variable se sustituye por un observable.
+\end{enumerate}
+Es fundamental recalcar que no se asume que el producto de dos observables arbitrarios esté definido.
+Los siguientes postulados permiten el uso de la teoría de las álgebras de Banach desarrollada por Gelfand y otros. Para cada observable $U \in \mathfrak{A}$ existe un número real no negativo $\| U \|$ (su norma) tal que:
+\begin{enumerate}
+    \item Si $\alpha \in \mathbb{R}$ y $U, V \in \mathfrak{A}$, entonces $\| \alpha U \| = |\alpha| \cdot \| U \|$ y $\| U + V \| \le \| U \| + \| V \|$. La condición $\| U \| = 0$ implica que $U = 0$. Además, $\mathfrak{A}$ es topológicamente completo respecto a la métrica inducida por esta norma. (Es decir, en base a esta simple norma, $\mathfrak{A}$ es un espacio de Banach real).
+    
+    \item $\| U^2 - V^2 \| \le \max\left[\| U^2 \|, \| V^2 \|\right]$. Esta condición expresa una propiedad \textit{ de positividad} intrínseca para los cuadrados de los observables.
+    
+    \item $\| U^2 \| = \| U \|^2$. Esta es una \textit{identidad fundamental}. Prácticamente todos los resultados de esta teoría (y los desarrollos matemáticos de los años sucesivos) se deducen a partir de ella. Tiene una equivalencia directa con la ``propiedad estelar'' característica de las $C^*$-álgebras ($\| xx^* \| = \| x \|^2$) para el caso de elementos autoadjuntos (ver \ref{Cestrella}).
+    
+    \item Si $\mathfrak{R} \subset \mathfrak{S}$ son subconjuntos finitos de $\mathfrak{A}$, entonces $\left\| \sum_{U\in\mathfrak{R}} U^2 \right\| \le \left\| \sum_{U\in\mathfrak{S}} U^2 \right\|$. Esta restricción sobre las sumas es la propiedad equivalente a que el sistema sea \textit{ ``formalmente real''} (compárese con la definición dada en la sección \ref{Formalmente Real}).
+    
+    \item $U^2$ es una función continua de $U$. Es decir, el cuadrado de una sucesión convergente a $U$, resulta ser una sucesión convergente a $U^2$.
+\end{enumerate}
+Físicamente, la norma de un observable debe interpretarse como su (valor numérico máximo (en valor absoluto) en valor absoluto, es decir, la magnitud más grande que un instrumento podría registrar en una medición. Matemáticamente, la inclusión de esta estructura métrica (o geométrica) resulta imprescindible para el tratamiento riguroso de los casos infinito-dimensionales, ya que es lo que permite definir la convergencia y asumir la completitud topológica del sistema. Con estas dos estructuras, la algebraica y la métrica, se definen por completo las características del sistema físico.\\
+De hecho, este es el corazón conceptual que se seguirá profundizando en este apartado: el logro de Segal al demostrar que es posible prescindir de los espacios de Hilbert tradicionales para formular un sistema físico.
+
+\subsection{Estados}
+\hspace{\parindent}Para establecer un puente entre la estructura algebraica abstracta de los observables y los resultados empíricos de las mediciones físicas, es indispensable introducir el concepto de estado. En este formalismo, un estado funciona como una herramienta matemática (una función lineal de valores reales) que nos permite extraer el valor esperado de cualquier observable. 
+\medskip
+
+La solidez de este modelo radica en que la existencia de estos estados no se da por sentada mediante postulados arbitrarios, sino que se demuestra rigurosamente aplicando los métodos analíticos utilizados en la prueba del teorema de Hahn-Banach. El uso de este teorema es crucial, ya que garantiza que siempre existirán suficientes estados funcionales para describir el sistema de forma completa sin necesidad de recurrir a los clásicos vectores en un espacio de Hilbert.\medskip
+
+\begin{definition} [\textbf{Estados}] Un estado de $\mathfrak{A}$ es una función lineal sobre $\mathbb{R}$ positiva (es decir, de valores reales) definida sobre $\mathfrak{A}$, que satisface las siguientes condiciones:
+\begin{itemize}
+    \item $\omega(U^2) \ge 0$: la función toma valores positivos sobre los elementos ``positivos'' del sistema (los cuadrados), lo que garantiza la ``positividad'' física (las varianzas y valores esperados de magnitudes al cuadrado no pueden ser negativos).
+    \item $\omega(I) = 1$: la función vale 1 en la unidad, lo que garantiza la ``normalización'' (la probabilidad total del sistema debe sumar 1).
+\end{itemize}
+\end{definition}
+Los escalares $\omega(U)$ representan el valor esperado de un observable $U$ en un estado $\omega$.
+
+\begin{definition}[\textbf{Estado Puro}]
+Un estado puro es aquel que no puede expresarse como una combinación lineal con coeficientes positivos de otros dos estados distintos.
+\end{definition}
+Matemáticamente, esto equivale a describir un estado puro como un ``punto extremo'' del conjunto de todos los estados posibles. \medskip
+
+\begin{definition}[\textbf{Colección Completa de Estados}]
+Una colección de estados de $\mathfrak{A}$ es \textit{completa} si para cualesquiera dos observables existe al menos un estado en la colección en el cual los observables tienen diferentes valores de expectativa.
+\end{definition}
+Para asegurar el comportamiento lógico del orden en este contexto, se define que un elemento es \textit{no-negativo} si puede expresarse como una suma finita de cuadrados, diciéndose que $U \ge V$ si la diferencia $U - V$ es no-negativa. 
+A partir de estas definiciones y mediante la aplicación de teoremas topológicos sobre conjuntos convexos (específicamente el teorema de Krein-Milman-Shmulyan),Segal obtiene el siguiente resultado:
+
+\begin{theorem} 
+    Todo sistema $\mathfrak{A}$ posee una colección completa de estados puros.
+\end{theorem}
+Como consecuencia para discriminar entre dos observables basta evaluarlos en el conjunto de los estados puros (sin necesidad de utilizar todo el conjunto de estados).\medskip
+
+\subsection{Conmutatividad y Espectro de un Observable}
+Recordemos que el producto de Jordan asociado al sistema viene dado por $U \circ V = \frac{1}{4}[(U+V)^2 - (U-V)^2]$. Elsistema se denomina \textit{conmutativo} si este producto formal cumple las siguientes propiedades para cualesquiera observables $U, V, W \in \mathfrak{A}$ y cualquier número real $\alpha$:
+\begin{itemize}
+    \item \textit{Asociativo:} $(U \circ V) \circ W = U \circ (V \circ W)$ (cabe destacar que la propiedad conmutativa $U \circ V = V \circ U$ se cumple siempre por la propia definición simétrica de la fórmula).
+    \item \textit{Distributivo} respecto a la suma: $(U + V) \circ W = U \circ W + V \circ W$.
+    \item \textit{Homogéneo} respecto a la multiplicación escalar: $(\alpha U) \circ V = \alpha (U \circ V)$.
+\end{itemize}
+Se dice que un conjunto de observables \textit{conmuta} si el subsistema cerrado que generan es conmutativo. En dicho caso, al producto formal se le denomina simplemente su producto. Es claro ver que todo observable conmuta consigo mismo y con la identidad.
+\begin{theorem}
+     Un sistema conmutativo es isomórfico (algebraica y métricamente) al sistema de todas las funciones continuas de valores reales sobre un espacio compacto de Hausdorff $\Delta$.
+\end{theorem}
+Compárese con los ejemplos correspondientes en los apartados \ref{Ejemplos*} y \ref{Ejemplos**} del apéndice.\medskip
+
+Aunque este teorema constituye un resultado matemático de gran calado, la consecuencia que reviste mayor interés físico para el desarrollo de la teoría es su aplicación a un único observable, lo cual se extrae formalmente en el siguiente corolario:\medskip
+\begin{corollary}
+ El subsistema cerrado generado por un único observable es isomórfico, algebraica y métricamente, al sistema de todas las funciones continuas sobre un espacio de Hausdorff compacto.
+\end{corollary}
+Este corolario es la pieza clave que permite introducir el siguiente concepto fundamental:
+\begin{definition}[\textbf{Espectro}]Los valores espectrales de un observable se definen como los valores numéricos que toma la función correspondiente a dicho observable en el isomorfismo descrito en el corolario anterior. Esta definición analítica toma su nombre históricamente de los fenómenos ópticos, como el espectro de emisión de los átomos (véase Figura \ref{fig:espectro}), conectando la abstracción matemática con las mediciones empíricas de laboratorio.
+\end{definition}
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=0.7\textwidth]{ESPECTRO.jpg}
+    \caption{Espectro electromagnético visible \cite{img_espectro}.}
+    \label{fig:espectro}
+\end{figure}
+
+De forma equivalente, y ofreciendo una \textit{definición alternativa} con una interpretación física más directa, los valores espectrales pueden definirse como los valores esperados de dicho observable en los estados puros del subsistema que este genera. 
+
+\subsection{Observabilidad Simultánea}
+\hspace{\parindent} En la mecánica cuántica estándar, el principio de indeterminación impide la medición simultánea de ciertos observables. Veremos bajo qué condiciones si es posible dicha medición simultánea.
+\begin{definition} 
+Se dice que un observable $U$ tiene un \textit{valor definido} en un estado $\omega$ si se satisface cualquiera de las siguientes condiciones equivalentes:
+\begin{itemize}
+    \item La dispersión (o varianza) de los valores espectrales de $U$ respecto a su valor esperado es cero.
+    \item $\omega$ actúa como un estado puro en el subsistema generado por $U$.
+    \item $\omega(U^2) = (\omega(U))^2$.
+\end{itemize}
+\end{definition}
+Para ilustrar esta definición, lo mejor es usar un caso de la mecánica cuántica tradicional. Un observable tiene un valor definido cuando el sistema se encuentra en un estado que es un autoestado de ese observable. La interpretación física se ve cuando se mide por ejemplo la energía de un electrón que está estabilizado en un nivel de energía concreto (un estado estacionario). Matemáticamente, en ese estado $\omega$, se cumple la igualdad $\omega(U^2) = (\omega(U))^2$.\\
+\begin{definition}
+     Una colección de observables es \textit{simultáneamente observable} si el sistema que generan posee una colección completa de estados en los cuales cada observable de la colección tiene un valor definido.
+\end{definition}
+Para ilustrar esta definición, se proponen como ejemplos de observables: La posición de una partícula (observable $Q$) y su momento lineal (observable $P$) no son simultáneamente observables. Como no conmutan entre sí, no existe un conjunto completo de estados donde ambos tengan un valor definido a la vez (esto es, en esencia, el Principio de Indeterminación de Heisenberg).
+\\
+Como culminación de estas definiciones y ejemplos, se formula el siguiente teorema, el cual formaliza una discusión de gran interés conceptual: demuestra cómo una propiedad empírica y aparentemente física (la observabilidad simultánea) se traduce de forma matemática y rigurosa en la propiedad algebraica de la conmutatividad.
+\begin{theorem}
+    Una colección de observables es simultáneamente observable si y solo si es conmutativa.
+\end{theorem}
+ Es crucial recordar en este punto la sutileza algebraica de este formalismo: que la colección sea ``conmutativa'' significa estrictamente que su producto de Jordan asociado es \textit{asociativo}. Si estuviéramos trabajando dentro de un álgebra asociativa tradicional (donde el producto estándar sí es asociativo por defecto), esta condición de Segal se traduciría en lo que clásicamente entendemos por conmutar (es decir, $UV = VU$).
+
+\subsection{La Norma Definida Algebraicamente y Extensión de Estados}
+\hspace{\parindent} Una consecuencia notable de la presente teoría es que la métrica (norma) del sistema no es un elemento ajeno, sino que está completamente determinada por el álgebra de los observables. 
+Sea $\varphi(U)$  el ínfimo de los números reales $\alpha$ para los cuales tanto $\alpha I - U$ como $\alpha I + U$ son elementos no-negativos (es decir, expresables como cuadrados en el sistema):
+\begin{equation}
+    \varphi(U) = \inf \{ \alpha \in \mathbb{R} \mid \alpha I - U = V^2, \, \alpha I + U = W^2 \}
+\end{equation}
+$\varphi$ es una función definida puramente a partir de la estructura algebraica.
+Segal obtiene una \textit{caracterización puramente algebraica de la norma}. En concreto:
+\begin{theorem}
+    La función $\varphi(\cdot)$ coincide con la norma $\|\cdot\|$ del sistema.
+\end{theorem}
+Segal además demuestra que los estados puros de un subsistema coinciden con la restricción de un estado puro del sistema global (lo que se puede considerar un resultado de extensión de estados).
+Como consecuencia se tiene que en el caso de operadores autoadjuntos en el espacio de operadores lienales acotados sobre un espacio de Hilbert existen estados puros del sistema tales que $\omega(U) \neq \langle Ux, x \rangle$ para cualquier vector $x$ del espacio de Hilbert.Si todos los estados puros fueran generados por vectores, los puntos del espectro continuo tendrían que comportarse como autovalores, lo cual constituye una contradicción. Por tanto, existen estados físicos abstractos que no admiten una representación mediante funciones de onda clásicas.
+La trascendencia de este último resultado radica en que evidencia una limitación matemática fundamental en la formulación estándar de la mecánica cuántica impulsada originalmente por Dirac y von Neumann. Tradicionalmente, la física asumía una equivalencia estricta e inquebrantable entre un ``estado físico puro'' y su representación \textit{usual} mediante rayos (o vectores) en un espacio de Hilbert (la conocida función de onda). Sin embargo, el resultado de Segal demuestra de forma rigurosa que este marco tradicional es, en realidad, demasiado restrictivo para abarcar la totalidad de los estados físicos posibles de un sistema, lo que justifica la necesidad de esta formalización matemática más abstracta y general para la mecánica cuántica.
+
+\subsection{Representación GNS: El retorno al Espacio de Hilbert}
+\hspace{\parindent} A lo largo de este capítulo se ha prescindido completamente del uso de un espacio de Hilbert para dotar de generalidad matemática a los postulados. Sin embargo, resulta sumamente interesante notar que, si los postulados algebraicos se refuerzan de una manera matemáticamente simple (aunque físicamente un tanto artificial), la colección de observables resulta ser isomórfica al álgebra de operadores de la teoría estándar.\
+Físicamente, este resultado tiene una implicación profunda: nos demuestra que la formulación tradicional de la mecánica cuántica (basada en la mecánica ondulatoria de Schrödinger y el formalismo de Dirac-von Neumann) no es una construcción arbitraria, sino una representación natural que emerge de las propias reglas de la medición empírica. En otras palabras, aunque hemos comprobado que la física cuántica puede fundamentarse de manera estricta fijándose únicamente en los observables del laboratorio, la estructura de la naturaleza garantiza que siempre podamos ``traducir''  ese sistema al lenguaje familiar de las funciones de onda y los espacios de Hilbert. Esto valida el uso de las herramientas clásicas de los físicos, confirmando que el marco tradicional de la teoría cuántica está perfectamente anclado en una realidad algebraica más profunda y general.
+\begin{theorem}
+    Sea $\mathfrak{A}$ un sistema compuesto por la colección de todos los elementos autoadjuntos de un álgebra asociativa real sobre la cual se define una operación de adjunción (un anti-automorfismo involutivo) $U \rightarrow U^*$. Supóngase que $U^*U$ es no-negativo y distinto de cero para todo elemento $U$ no nulo del álgebra. Entonces, $\mathfrak{A}$ es isomórfico, algebraica y métricamente, al sistema de todos los elementos autoadjuntos de un álgebra autoadjunta uniformemente cerrada de operadores acotados sobre un espacio de Hilbert real.
+\end{theorem}
+El proceso usado para obtener este espacio de Hilbert es lo que se conoce en la literatura como construcción GNS en honor a Gelfand, Naimark y Segal.\medskip
+
+Para comprender la magnitud teórica de este teorema, es vital conectarlo con la clasificación de las álgebras de Jordan, von Neumann y Wigner. En principio, la estructura axiomática general propuesta por Segal describe una \textit{álgebra formalmente real} de dimensión posiblemente infinita que satisface las propiedades cuánticas esenciales (existencia de estados puros, espectro, observabilidad simultánea). Bajo esas condiciones generales, el sistema podría corresponder a cualquiera de los casos de Jordan, incluyendo el álgebra excepcional (como el álgebra de Albert sobre octoniones, que es estrictamente no asociativa).\medskip
+
+Sin embargo, al introducir la hipótesis matemática de la adjunción en este teorema, se está forzando al sistema a colapsar en el caso \textit{especial}: concretamente, se restringe a una subálgebra real autoadjunta (cerrada bajo la adjunción y bajo la norma) embebida en una $C^*$-álgebra \ref{Cestrella}. Esta es, precisamente, la restricción física que descarta las geometrías excepcionales y garantiza el retorno a la representación clásica del espacio de Hilbert.\medskip
+
+Se citan ahora dos ejemplos de estructuras algebraicas que son esenciales y que a partir de ellos se pueden explicar y entender muchos otros:
+\begin{example}[\textbf{Modelo de Dirac}]
+     Sistema formado por todos los operadores autoadjuntos acotados pertenecientes a un álgebra uniformemente cerrada sobre un espacio de Hilbert (conteniendo el operador identidad). La correspondiente norma métrica, que equivale a la cota del operador, será:
+    $$ \|U\| = \sup_{\langle x,x\rangle=1} \sqrt{\langle Ux,Ux\rangle} $$
+    Y el estado $\omega$ evaluado por $U$, asumiendo un vector normalizado $\langle x,x\rangle=1$, quedará como:
+    $$ \omega(U) = \langle Ux,x\rangle $$
+    Este caso constituye el arquetipo de un sistema físico no conmutativo. Su estructura matemática impone restricciones en la medición simultánea de variables, modelando de forma intrínseca el comportamiento cuántico.
+\end{example}
+\begin{example}[\textbf{Modelo de Schrödinger}]
+  Sistema compuesto por la colección completa de funciones continuas de valor real definidas sobre un espacio topológico compacto de Hausdorff $\Gamma$. La correspondiente norma métrica será el valor numérico máximo de la función:
+    $$ \|U\| = \max_{\gamma\in\Gamma} |U(\gamma)| $$
+    Por el teorema de representación de Riesz-Radon-Markoff, la definición del estado general se expresa mediante una medida regular $\mu$ sobre $\Gamma$ (tal que $\mu(\Gamma)=1$), quedando como:
+    $$ \omega(U) = \int_{\Gamma} U(\gamma) d\mu(\gamma) $$
+    Y la definición de un estado puro se reduce a la evaluación en un punto fijo $\gamma_0 \in \Gamma$:
+    $$ \omega(U) = U(\gamma_0) $$
+    Representa el estándar de un sistema estrictamente conmutativo. Modela escenarios de la física clásica y la estadística tradicional donde no existe incertidumbre fundamental al medir múltiples observables a la vez
+\end{example}
+
+\section{GEOMETRÍA DEL ESPACIO DE ESTADOS DE LOS OBSERVABLES}
+Es pertinente recordar que las álgebras de Jordan-Banach, conocidas modernamente como JB-álgebras (véase el Apéndice \ref{JB-algebra} para su definición formal), se consolidaron a finales de la década de 1970 como la estructura algebraica de dimensión infinita óptima y definitiva para el estudio de la mecánica cuántica. Su introducción formal en 1978 a través del trabajo de Alfsen, Shultz y Størmer \cite{A-S-S} supuso un punto de inflexión de vital importancia: el reencuentro histórico entre la abstracción axiomática del análisis funcional y las estructuras puramente empíricas propuestas originalmente por Jordan. Tras décadas en las que el desarrollo de la física de operadores y las álgebras de Jordan habían seguido caminos matemáticos paralelos, la maduración de herramientas topológicas y de geometría convexa permitió finalmente unificar ambos mundos de forma sólida. Con la culminación de esta teoría matemática se da, por tanto, una respuesta directa a la primera cuestión fundamental planteada en la introducción de este trabajo: las JB-álgebras constituyen la estructura algebraica subyacente más general y rigurosa para describir fiélmente los observables de un sistema físico.
+\medskip
+
+Utilizaremos el monográfico  \cite{Al-Sch} como referencia básica para este capítulo.\medskip
+El resultado fundamental de \cite{Al-Sch} es una caracterización geométrica del espacio de los estados de un sistema cuántico. Lo cual es la respuesta a la segunda de las preguntas objetivo de este Trabajo de Fin de Grado. Concretamente,  dado un conjunto convexo compacto $K$ existen ciertas condiciones geométricas que lo convierten en el espacio de estados de un sistema cuántico. \medskip
+
+A continuación enunciamos dicho resultado:
+\begin{theorem}[\textbf{Caracterización del espacio de estados}] \label{Teorema7}
+    
+Un conjunto convexo compacto $K$ es afínmente homeomórfico al espacio de estados de un álgebra JB si y solo si:
+\begin{enumerate}
+    \item Toda cara norma-expuesta de $K$ es proyectiva.
+    \item $K$ tiene las propiedades de estado puro. %(o de forma equivalente, la envoltura $\sigma$-convexa de sus puntos extremos es una cara dividida y $K$ tiene la propiedad de la bola de Hilbert.)
+    \item Todo $a\in \mathcal{A}(K)$ admite una descomposición $a=b-c$ con $b, c\in \mathcal{A}(K)^{+}$ y $b\perp c$.
+\end{enumerate}
+\end{theorem}
+\bigskip
+
+Para visualizar estas propiedades geométricas de manera intuitiva, podemos pensar en un poliedro tridimensional como el dodecaedro (Figura \ref{fig:dodecaedro}). En esta analogía visual, el volumen sólido interior representaría el conjunto convexo de estados mixtos, las caras externas serían análogas a las caras norma-expuestas, y los vértices puntiagudos representarían los puntos extremos o estados puros del sistema.
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=0.4\textwidth]{DODE.jpeg}
+    \caption{Dodecaedro regular \cite{img_dodecaedro}.}
+    \label{fig:dodecaedro}
+\end{figure}
+
+Dedicaremos el resto de esta sección a explicar las hipótesis de este teorema e identificarlas con conceptos matemáticos y físicos más conocidos.\medskip
+
+Primeramente asumiremos que la estructura físico-matemática del sistema está modelada por un par dual $(A, V)$, que cumple con ciertas características.\medskip
+El conjunto $V$ es un espacio normado base, es decir, espacio vectorial con una norma, un cono de positivos y una base distinguida. En nuestro caso la base distinguida se llamará $K$ y es lo acabará siendo el conjunto de estados. Además  $A$ será el dual de $V$ ($A=V^*$) lo que le da sentido a ``par dual''. El espacio (de Banach) $A$ acabará siendo una JB-álgebra. Cabe decir que en este par dual en principio ni se tiene una estructura algebraica en $A$, ni estados puros en $V$, lo que aparecerá al añadir las hipótesis geométricas del teorema \ref{Teorema7}.\medskip
+
+Una \textit{cara} $F$ en el conjunto convexo $K$ viene dada por la siguiente propiedad: dados $x,y \in K$  $$\lambda x + (1-\lambda )y \in F\Longrightarrow x,y \in F.$$
+Un punto $\varphi$ de $K$ se dice \emph{punto extremo} si $$\varphi=\lambda x + (1-\lambda )y \Longrightarrow x=y=\varphi.$$
+Acabaremos identificando los puntos extremos de $K$ con los estados puros del sistema.
+Una cara $F\subseteq K$ es \textit{norma-expuesta} si existe un elemento en $A$, donde todos los elementos de la cara toman el valor máximo.  Una cara en $K$ norma-expuesta es \textit{proyectiva} si se puede identificar con una proyección $p$ en $A$ (es decir $p^2=p=p^\dagger$). \bigskip
+
+Las \textbf{propiedades de estado puro} (segunda condición en Teorema \ref{Teorema7}) son tres. 
+\begin{enumerate}
+    \item Todo punto extremo de $K$ es norma-expuesto.
+    \item Para cada compresión $P$, la aplicación $P^*$ preserva rayos extremos  
+    \item Se cumple la simetría de la probabilidad de transición 
+\end{enumerate}
+La primera condición nos dice que los puntos extremos de $K$ (estados puros) se pueden identificar con proyecciones minimales en $A$ (también llamados átomos). \medskip
+
+Un rayo extremo es una semirecta en el cono de positivos que no puede expresarse como combinación lineal de otros elementos del cono  Se pueden identificar los rayos extremos con estados puros (no son mas que la intersección de la semirrecta  con $K$). Las compresiones $P$ y sus duales asociados $P^*$ se pueden identificar con filtros (ver Figura \ref{fig:filtro}), un concepto introducido clásicamente en el formalismo de Dirac \cite{Dirac}. Un \textit{filtro} es un dispositivo que solo deja pasar a las partículas que se encuentran en un estado específico, bloqueando las demás y alterando el estado original de todo el sistema. Físicamente, lo que quiere decir es que una medición no destructiva sobre un estado puro da como resultado otro estado puro.\medskip
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=0.6\textwidth]{FILTRO.webp}
+    \caption{Esquema de un filtro físico de polarización, ilustrando el modelo de medición de Dirac \cite{img_filtro}.}
+    \label{fig:filtro}
+\end{figure}
+
+La tercera propiedad empírica exigida es la simetría de la probabilidad de transición. Físicamente, esto establece que, dados dos estados puros cualesquiera (representados geométricamente por rayos extremos y algebraicamente por proyecciones minimales o átomos), la probabilidad de que un sistema preparado inicialmente en el primer estado puro logre atravesar un filtro que selecciona exclusivamente el segundo estado, es exactamente idéntica a la probabilidad del proceso inverso. Esta simetría refleja un principio de reversibilidad estadístico fundamental en las mediciones cuánticas: el nivel de "solapamiento" o transición entre dos estados fundamentales de información máxima no depende de cuál actúa como estado origen y cuál como filtro destino. \medskip
+
+La última condición del teorema afirma que todo elemento de $\mathcal{A}(K)$ admite una  descomposicón ortogonal como diferencia de elementos positivos, donde $\mathcal{A}(K)$ es el espacio de funciones afines sobre el conjunto $K$. Esta última condición permite construir un cálculo funcional lo que a la postre posibilita la definición de un producto de Jordan sobre el espacio $A$ que en este momento satisfará todas las condiciones que necesita para se una JB-álgebra (ver apéndice \ref{JB-algebra}).
+
+\section{CONCLUSIÓN}
+\hspace{\parindent} La elaboración de este Trabajo de Fin de Grado ha supuesto un reto personal considerable debido a la profunda complejidad matemática y al alto grado de abstracción que exige el estudio de estas estructuras algebraicas. Abandonar la comodidad operativa del espacio de Hilbert tradicional para adentrarse en el terreno de las álgebras de Jordan, las $C^*$-álgebras y la geometría convexa abstracta requiere un cambio de paradigma riguroso. Sin embargo, este esfuerzo ha resultado enormemente enriquecedor a nivel personal y académico. Me ha gustado especialmente porque me ha brindado la oportunidad de situar con precisión, desde una perspectiva histórica, el nacimiento y el transcurso de la física cuántica. Me ha permitido comprender las verdaderas motivaciones físicas y filosóficas que impulsaron a figuras como von Neumann, Jordan y Wigner a replantearse desde cero los fundamentos matemáticos de la teoría para adaptarlos a la estricta realidad empírica del laboratorio.
+
+Aunque a lo largo del texto nos hemos centrado en la estructura estática y cinemática, la potencia de estos formalismos se hace evidente al estudiar la evolución temporal de los valores esperados de los observables (como se ilustra en la Figura \ref{fig:dinamica} para la posición y el momento), traduciendo el álgebra abstracta en predicciones físicas verificables.
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=0.45\textwidth]{XMEDIO.png}
+    \hfill
+    \includegraphics[width=0.45\textwidth]{PMEDIO.png}
+    \caption{Evolución del valor medio de la posición ($x$) y el momento ($p$), ilustrando la dinámica cuántica de los observables.}
+    \label{fig:dinamica}
+\end{figure}
+
+Al tratarse de un proyecto de naturaleza eminentemente bibliográfica, el proceso de investigación ha sido tan laborioso como fascinante. Enfrentarme a la lectura, traducción y asimilación de artículos históricos y tratados matemáticos densos ha sido, en muchas ocasiones, una tarea exigente que requería desgranar conceptos muy alejados de la intuición clásica. Por esta razón, el desarrollo del trabajo se ha llevado a cabo de forma muy pausada y meticulosa, avanzando poco a poco. Cada apartado ha sido elaborado y revisado con paciencia, cimentando bien los teoremas y los resultados antes de dar el siguiente paso, con el objetivo primordial de asegurar el rigor y no dejar errores conceptuales en un terreno matemático tan delicado.
+
+En definitiva, este viaje desde la búsqueda original de una generalización algebraica hasta la elegante caracterización geométrica moderna del espacio de estados, no sólo me ha dotado de unas herramientas analíticas formidables, sino que me ha permitido contemplar la mecánica cuántica desde sus cimientos más profundos y elegantes.
+
+\appendix
+\section{APÉNDICE: estructuras algebraicas}
+\subsection{Definición formal de Álgebra sobre un cuerpo}
+Sea $\mathbb{K}$ un cuerpo (en el contexto de la mecánica cuántica, típicamente el cuerpo de los números reales $\mathbb{R}$ o el de los complejos $\mathbb{C}$). Un conjunto no vacío $A$ es un \textbf{álgebra sobre el cuerpo $\mathbb{K}$} (o simplemente una $\mathbb{K}$-álgebra) si cumple las dos condiciones siguientes:
+\begin{enumerate}
+    \item $A$ es un espacio vectorial sobre $\mathbb{K}$. Es decir, están definidas dos operaciones:
+    \begin{itemize}
+        \item \textbf{Suma:} $A \times A \to A$, denotada por $(x,y) \mapsto x+y$, que confiere a $A$ estructura de grupo abeliano.
+        \item \textbf{Producto por escalares:} $\mathbb{K} \times A \to A$, denotada por $(\lambda, x) \mapsto \lambda x$.
+    \end{itemize}
+    
+    \item Está definida una segunda operación interna en $A$ llamada \textbf{producto}, $A \times A \to A$, denotada habitualmente por yuxtaposición $(x,y) \mapsto xy$, que es \textit{bilineal}. Esto significa que para cualesquiera $x, y, z \in A$ y cualquier escalar $\lambda \in \mathbb{K}$, se satisfacen los siguientes axiomas:
+    \begin{itemize}
+        \item \textbf{Distributiva por la izquierda:} $x(y+z) = xy + xz$
+        \item \textbf{Distributiva por la derecha:} $(x+y)z = xz + yz$
+        \item \textbf{Compatibilidad con escalares:} $\lambda(xy) = (\lambda x)y = x(\lambda y)$
+    \end{itemize}
+\end{enumerate}
+Es de vital importancia destacar que, en su definición más general, un álgebra \textbf{no} exige que su producto interno satisfaga la propiedad asociativa ($(xy)z = x(yz)$) ni la propiedad conmutativa ($xy = yx$). Cuando un álgebra cumple alguna de estas propiedades adicionales, recibe el nombre de álgebra asociativa o álgebra conmutativa, respectivamente.
+
+\subsection{Álgebras de Jordan} \label{A alg jordan}
+Un álgebra de Jordan se define formalmente como un álgebra sobre un cuerpo $\mathbb{K}$ cuyo producto satisface dos axiomas fundamentales.
+\begin{enumerate}
+    \item \textbf{Conmutatividad:} El producto tiene que ser conmutativo.
+    \begin{equation}
+        xy = yx
+    \end{equation}
+    \item \textbf{Identidad de Jordan:} Aunque el álgebra no exige la propiedad asociativa general $((xy)z = x(yz))$, sí debe cumplir una versión débil de la misma que relaciona el cuadrado de un elemento con el producto por otro, conocida como la Identidad de Jordan:
+    \begin{equation}
+        (x^2y)x = x^2(yx)
+    \end{equation}
+\end{enumerate}
+Dada un álgebra $A$ asociativa, se puede dotar a este espacio de un nuevo producto simetrizado definido como:
+\begin{equation}
+    a \circ b = \frac{1}{2}(ab + ba)
+\end{equation}
+Este nuevo producto sí que es conmutativo ($a \circ b = b \circ a$) pero, como contrapartida, pierde la asociatividad general. Sin embargo, conserva exactamente la forma débil de asociatividad descrita en el segundo axioma (la Identidad de Jordan). 
+
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=0.25\textwidth]{JORDAN.jpeg}
+    \caption{Pascual Jordan.}
+    \label{fig:jordan}
+\end{figure}
+
+Al proceso de construir una estructura de Jordan a partir del producto de un álgebra asociativa se le denomina \textit{cuasi-multiplicación}, y al álgebra resultante se la conoce en matemáticas como \textbf{Álgebra de Jordan Especial}.\\
+A fin de ilustrar este fenómeno de manera explícita, consideremos el ejemplo arquetípico de un álgebra asociativa que se transforma en un álgebra de Jordan mediante este procedimiento: el espacio de las matrices cuadradas de orden 2 con coeficientes reales, denotado por $\mathcal{M}_2(\mathbb{R})$.
+Bajo el producto matricial ordinario, esta estructura es asociativa pero marcadamente no conmutativa. Tomemos como referencia dos elementos particulares $a, b \in \mathcal{M}_2(\mathbb{R})$. Si efectuamos el producto asociativo convencional en ambos órdenes, constatamos de inmediato que $ab \neq ba$. Sin embargo, al dotar al espacio vectorial del producto simetrizado de Jordan $\circ$, se fuerza la conmutatividad obteniendo:
+\begin{equation}
+   a \circ b = \frac{1}{2}(ab + ba) = \frac{1}{2} (ba + ab)=b\circ a  
+\end{equation}
+ 
+Por otra parte, este ejemplo permite comprobar la pérdida de la asociatividad general. Si calculamos por un lado $(a \circ a) \circ b$, (calculando en primer lugar $ (a \circ a)= \frac{1}{2} \left[ aa + aa]=a^2$) luego es inmediato el resultado
+\begin{equation}
+       (a \circ a) b= a^2 \circ b = \frac{1}{2}(a^2b + ba^2)
+\end{equation}
+Por otro obtenemos
+\begin{equation}
+   a \circ (a \circ b) = a \circ \left[ \frac{1}{2}(ab + ba) \right] = \frac{1}{2} \left( a \left[ \frac{1}{2}(ab + ba) \right] + \left[ \frac{1}{2}(ab + ba) \right] a \right)
+\end{equation}
+Queda demostrado sencillamente que $(a \circ a) \circ b \neq a \circ (a \circ b)$. \\
+No obstante, una verificación directa sobre cualquier par de matrices demuestra que la identidad débil de Jordan, $(a^2 \circ b) \circ a = a^2 \circ (b \circ a)$, se preserva de manera idéntica en todo el espacio, consolidando a $M_2(\mathbb{R})$ con el producto $\circ$ como un álgebra de Jordan concreta.
+
+\subsection{C$^*$-Álgebras} \label{Cestrella} \label{Ejemplos*}
+En el desarrollo moderno de la mecánica cuántica, la estructura matemática abstracta por excelencia es la \textbf{C$^*$-álgebra}. 
+Desde el punto de vista del álgebra y el análisis funcional, una C$^*$-álgebra es un álgebra $A$ (asociativa y en general, de matrices)  sobre el cuerpo de los números complejos ($\mathbb{C}$) dotada de dos estructuras topológicas y algebraicas adicionales compatibles: una \textit{involución} y una \textit{norma completa} (que la convierten en un álgebra de Banach). Se define formalmente por los siguientes axiomas:
+\begin{enumerate}
+    \item \textbf{Involución ($^*$):} Existe una aplicación $*: A \to A$, denotada como $x \mapsto x^*$, que es una involución antilineal. Esto significa que para cualesquiera $x, y \in A$ y $\lambda \in \mathbb{C}$ se cumple:
+    \begin{itemize}
+        \item $(x^*)^* = x$ \quad (es involutiva).
+        \item $(x + y)^* = x^* + y^*$
+        \item $(\lambda x)^* = \bar{\lambda} x^*$ \quad (donde $\bar{\lambda}$ es el complejo conjugado).
+        \item $(xy)^* = y^* x^*$ \quad (invierte el orden del producto).
+    \end{itemize}
+    (Nota: A los elementos que cumplen la condición $x = x^*$ se les denomina \textit{autoadjuntos} o hermíticos).
+    
+    \item \textbf{Estructura de Álgebra de Banach:} El conjunto $A$ es un espacio vectorial normado y topológicamente completo (un espacio de Banach) respecto a una cierta norma $\|\cdot\|$. Dicha norma debe ser submultiplicativa respecto al producto del álgebra; es decir,
+    \begin{equation}
+        \|xy\| \le \|x\| \|y\|
+    \end{equation}
+    
+    \item \textbf{Identidad C$^*$:} La norma y la involución están acopladas de manera extremadamente rígida mediante la siguiente condición fundamental, conocida como la identidad C$^*$, válida para todo $x \in A$:
+    \begin{equation}
+        \|x^* x\| = \|x\|^2
+    \end{equation}
+\end{enumerate}
+ 
+La importancia radical de las C$^*$-álgebras en la física matemática radica en el célebre \textbf{Teorema de Gelfand-Naimark}. Este teorema demuestra que toda C$^*$-álgebra abstracta es isométricamente *-isomorfa a una subálgebra cerrada del espacio de operadores lineales acotados que actúan sobre un cierto Espacio de Hilbert. 
+En la formulación algebraica de la mecánica cuántica (desarrollada posteriormente por I. Segal y otros), el sistema físico se define abstractamente por una C$^*$-álgebra. En este marco, los elementos autoadjuntos ($x=x^*$) representan los \textbf{observables} del sistema. A diferencia del álgebra finita de Jordan de 1934, la potente estructura topológica (la norma y la completitud) de las C$^*$-álgebras es lo que permite transitar de forma matemáticamente segura hacia espacios de dimensión infinita (operadores y matrices infinitas), permitiendo definir con rigor el espectro de los observables y los estados del sistema como funcionales lineales positivos.\\
+Para dotar de contenido concreto a esta estructura abstracta, es fundamental mencionar los \textit{ejemplos arquetípicos} de $C^*$-álgebras que motivan y sustentan la teoría:
+\begin{itemize}
+    \item \textbf{El álgebra $\mathcal{B}(\mathcal{H})$:} El conjunto de todos los operadores lineales acotados que actúan sobre un espacio de Hilbert complejo $\mathcal{H}$. Constituye el ejemplo primordial de $C^*$-álgebra (en general, no conmutativa). En este espacio, el producto es la composición de operadores, la involución corresponde a la toma del operador adjunto ($T \mapsto T^*$) y la norma es la norma usual de operadores.
+    
+    \item \textbf{Funciones continuas sobre un espacio compacto de Hausdorff, $C(X)$:} El espacio de todas las funciones continuas con valores complejos definidas sobre un espacio topológico compacto de Hausdorff $X$. Este es el ejemplo clásico por excelencia de una $C^*$-álgebra conmutativa. Aquí, las operaciones algebraicas son puntuales, la involución es la conjugación compleja ($f^*(x) = \overline{f(x)}$) y la norma es la norma del supremo ($\|f\| = \sup_{x\in X} |f(x)|$).
+    
+    \item \textbf{Subálgebras cerradas de $\mathcal{B}(\mathcal{H})$:} Cualquier subálgebra de $\mathcal{B}(\mathcal{H})$ que sea cerrada respecto a la topología inducida por la norma de operadores y cerrada bajo la involución estelar (es decir, que si $T$ pertenece a la subálgebra, su adjunto $T^*$ también lo hace) es, por definición, una $C^*$-álgebra. De hecho, el Teorema de Gelfand-Naimark previamente citado garantiza que \textit{toda} $C^*$-álgebra abstracta es isométricamente $*$-isomorfa a una de estas subálgebras concretas.
+\end{itemize}
+
+\subsection{JB-Álgebras (Álgebras de Jordan-Banach)} \label{Ejemplos**} \label{JB-algebra}
+Se trata, esencialmente, de la versión normada y métricamente completa de un álgebra de Jordan. A diferencia de las $C^*$-álgebras, en las JB-álgebras \textbf{el espacio se construye íntegramente sobre el cuerpo de los números reales y carece de involución}.\\
+Formalmente, un álgebra $A$ sobre el cuerpo de los números reales ($\mathbb{R}$) es una JB-álgebra si es simultáneamente un álgebra de Jordan (cuyo producto Jordan denotaremos por $\circ$) y un espacio de Banach respecto a una cierta norma $\|\cdot\|$, sometida a las siguientes tres condiciones de compatibilidad para cualesquiera $a, b \in A$:
+\begin{enumerate}
+    \item \textbf{Submultiplicatividad de la norma:} El producto de Jordan es continuo respecto a la topología inducida por la norma, lo que equivale a afirmar que el espacio dota de estructura de \textbf{álgebra normada}:
+    \begin{equation}
+        \|a \circ b\| \leq \|a\|\|b\|
+    \end{equation}    
+    \item \textbf{Identidad isométrica de potencias (Propiedad estelar):} La norma se comporta de forma clásica frente a los cuadrados de los observables. Esta condición es, en esencia, la traducción exacta de la identidad $C^*$ ($\|x^*x\| = \|x\|^2$) al contexto de un álgebra real donde los elementos actúan como sus propios autoadjuntos ($a = a^*$). Al prescindir de la involución, la identidad estelar toma la forma:
+    \begin{equation}
+        \|a^2\| = \|a\|^2
+    \end{equation}
+    \item \textbf{Condición de positividad (Condición formalmente real con la norma):} La norma debe respetar el orden natural de los cuadrados, garantizando que el álgebra se comporte topológicamente como una estructura real. Esta desigualdad es la versión métrica y topológica de la propiedad algebraica de ser ``formalmente real'' exigida en 1934 (la cual dictaba que $a^2 + b^2 = 0 \implies a = b = 0$). Al exigir la condición:
+    \begin{equation}
+        \|a^2\| \leq \|a^2 + b^2\|
+    \end{equation}
+\end{enumerate}
+Las JB-álgebras representan, por tanto, el marco matemático moderno definitivo (sin dejar ningún caso fuera) para describir sistemas cuánticos de observables reales. Además, la conexión entre ambos mundos es directa y constructiva: si consideramos una $C^*$-álgebra (con su producto asociativo usual) y nos restringimos a su subespacio de elementos autoadjuntos, al dotar a este espacio real del producto simetrizado de Jordan, la estructura resultante se convierte automáticamente en una JB-álgebra. De este modo, se vincula de manera natural y rigurosa el análisis funcional contemporáneo con la visión puramente algebraica y empírica de 1934. \\
+Para terminar de introducir esta estructura, se mencionan los ejemplos canónicos de JB-álgebras,que guardan un paralelismo directo con los presentados para las $C^*$-álgebras:
+\begin{itemize}
+    \item \textbf{La parte autoadjunta $\mathcal{B}(\mathcal{H})_{sa}$:} El álgebra de Jordan asociada a la parte autoadjunta de $\mathcal{B}(\mathcal{H})$ es una JB-álgebra.
+    \item \textbf{Funciones continuas reales, $C(X, \mathbb{R})$:} El espacio de las funciones continuas definidas sobre un espacio compacto de Hausdorff $X$, que toman valores exclusivamente reales. Al ser el producto puntual clásico de funciones ya conmutativo ($fg = gf$), el producto de Jordan coincide con el usual ($f \circ g = fg$). Dotado de la norma del supremo, es el ejemplo arquetípico de una JB-álgebra asociativa.
+    \item \textbf{El álgebra excepcional $M_3^8$:} También conocida como álgebra de Albert, corresponde al espacio de las matrices hermíticas de dimensión $3 \times 3$ con coeficientes en los octoniones. Es un ejemplo singular y de gran relevancia matemática porque es un álgebra de Jordan de dimensión finita \textit{excepcional}. A pesar de esta rareza geométrica, satisface todos los axiomas de una JB-álgebra y ha despertado un enorme interés en la física teórica para explorar formulaciones matemáticas exóticas en mecánica cuántica.
+\end{itemize}
+Cabe destacar que los dos primeros ejemplos expuestos corresponden a álgebras de Jordan \textit{especiales}, mientras que el tercer caso ($M_3^8$) no lo es (es un álgebra \textit{excepcional}). Esta distinción estructural no se desarrollará en este punto, sino que se abordará en detalle más adelante, en la sección dedicada a la clasificación de Jordan-von Neumann-Segal.
+
+\begin{thebibliography}{100}
+\bibitem{Al-Sch}
+E.M. Alfsen and F.W. Shultz,\\
+{\em Geometry of State Spaces of Operator Algebras},\\
+Birkhäuser,\\
+2003.
+
+\bibitem{A-S-S}
+E.M. Alfsen, F.W. Shultz and E. Størmer,\\
+{\em A Gelfand-Neumark theorem for Jordan algebras},\\
+Advances in Mathematics,\\
+vol. 28, p. 11-56,\\
+1978.
+
+\bibitem{Dirac}
+P.A.M. Dirac,\\
+{\em The Principles of Quantum Mechanics},\\
+Oxford University Press,\\
+1930.
+
+\bibitem{Gelf-Nai}
+I. Gelfand and M. Naimark,\\
+{\em On the imbedding of normed rings into the ring of operators in Hilbert space},\\
+Matematicheskii Sbornik,\\
+vol. 12, p. 197-213,\\
+1943.
+
+\bibitem{SoloJordan}
+P. Jordan,\\
+{\em Über die Multiplikation quantenmechanischer Größen},\\
+Zeitschrift für Physik,\\
+vol. 80, p. 285-291,\\
+1933.
+
+\bibitem{Jo-Neu-Wi}
+P. Jordan, J. von Neumann and E. Wigner,\\
+{\em On an Algebraic Generalization of the Quantum Mechanical Formalism},\\
+Annals of Mathematics,\\
+vol. 35, p. 29-64,\\
+1934.
+
+\bibitem{Segal}
+I.E. Segal,\\
+{\em Postulates for general quantum mechanics},\\
+Annals of Mathematics,\\
+vol. 48, p. 930-948,\\
+1947.
+
+\bibitem{JvonNeuman}
+J. von Neumann,\\
+{\em Mathematische Grundlagen der Quantenmechanik},\\
+Springer,\\
+1932.
+
+\bibitem{img_stern}
+Imagen del experimento Stern-Gerlach,\\
+\url{https://la-mecanica-cuantica.blogspot.com/2009/08/el-experimento-stern-gerlach.html}
+
+\bibitem{img_octonion}
+Imagen de Octonión,\\
+\url{https://es.wikipedia.org/wiki/Octoni%C3%B3n#/media/Archivo:Octonionstar123.png}
+
+\bibitem{img_jordan}
+Imagen de Pascual Jordan,\\
+\url{https://www.deutsche-biographie.de/gnd117182826.html#dbocontentj}
+
+\bibitem{img_espectro}
+Imagen de Espectro visible,\\
+\url{https://www.erco.com/es/planificacion-de-iluminacion/conocimientos-luminotecnicos/fotometria/espectro-visible-7528/}
+
+\bibitem{img_vonneumann}
+Imagen de John von Neumann,\\
+\url{https://theobjective.com/further/categoria/2020-01-04/los-marcianos-hungaros-que-convirtieron-a-estados-unidos-en-una-potencia-cientifica/}
+
+\bibitem{img_wigner}
+Imagen de Eugene Wigner,\\
+\url{https://www.atomicarchive.com/resources/biographies/wigner.html}
+
+\bibitem{img_dodecaedro}
+Imagen de Dodecaedro,\\
+\url{https://www.sangakoo.com/es/temas/dodecaedro-regular-area-y-volumen}
+
+\bibitem{img_filtro}
+Imagen de Filtro (Modelo de Dirac),\\
+\url{https://www.researchgate.net/figure/Diracs-model-A-photon-polarized-obliquely-at-angle-a-is-in-a-superposition-of-vertical_fig7_363635517}
+\end{thebibliography}
+
+\end{document}
